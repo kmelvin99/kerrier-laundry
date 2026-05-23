@@ -1,0 +1,420 @@
+/* ================================================
+   Kerrier Laundry Co. — Main Stylesheet
+   Colors: Navy #163551 | Cream #FCF9F4
+   ================================================ */
+
+/* --- CSS Variables --- */
+:root {
+    --primary-navy:     #163551;
+    --primary-cream:    #FCF9F4;
+    --accent-navy:      #1e4a6e;
+    --soft-border:      #d6cfc6;
+    --text-dark:        #2c2c2c;
+    --text-muted:       #666666;
+    --white:            #ffffff;
+    --shadow:           0 2px 12px rgba(22, 53, 81, 0.10);
+    --radius:           8px;
+    --transition:       all 0.25s ease;
+}
+
+/* ================================================
+   RESET & BASE
+   ================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* smooth scrolling for anchor links */
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--primary-cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ================================================
+   SITE HEADER — Logo title card above navbar
+   ================================================ */
+.site-header {
+    background-color: var(--primary-cream);
+    text-align: center;
+    padding: 30px 20px 20px 20px;
+    border-bottom: 1px solid var(--soft-border);
+}
+
+.header-logo {
+    width: 320px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ================================================
+   NAVBAR — Navigation bar below header
+   ================================================ */
+nav {
+    background-color: var(--primary-navy);
+    position: sticky; /* sticks to top when scrolling */
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 16px 20px;
+    flex-wrap: wrap; /* wraps on small screens */
+}
+
+.nav-links a {
+    color: var(--primary-cream);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: var(--transition);
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    border-bottom: 2px solid var(--primary-cream);
+    opacity: 0.85;
+}
+
+/* ================================================
+   BOOK LAUNCH — Hero call to action section
+   ================================================ */
+#book-launch {
+    background-color: var(--white);
+    text-align: center;
+    padding: 60px 20px;
+    border-bottom: 1px solid var(--soft-border);
+}
+
+#book-launch p {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+#book-launch p:first-of-type {
+    font-size: 1.6rem;
+    color: var(--primary-navy);
+    font-weight: bold;
+}
+
+/* Book Now button */
+#book-launch button {
+    margin-top: 24px;
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+}
+
+#book-launch button:hover {
+    background-color: var(--accent-navy);
+    transform: translateY(-2px); /* subtle lift on hover */
+    box-shadow: var(--shadow);
+}
+
+/* ================================================
+   PRICING INTRO — "Pricing is based on zones"
+   ================================================ */
+body > p {
+    text-align: center;
+    padding: 30px 20px 0 20px;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ================================================
+   SERVICE AREA — Zone table section
+   ================================================ */
+.service-area {
+    max-width: 800px;
+    margin: 30px auto 60px auto;
+    padding: 0 20px;
+}
+
+.service-area h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--primary-navy);
+    margin-bottom: 10px;
+}
+
+.service-area > p {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+/* Zone Table */
+.zone-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    overflow: hidden; /* keeps rounded corners on table */
+}
+
+.zone-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--soft-border);
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+/* Right align the mileage column */
+.zone-table td:last-child {
+    text-align: right;
+    color: var(--text-muted);
+}
+
+/* Zone header rows in navy */
+.zone-header th {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+/* Alternating row shading */
+.zone-table tr:nth-child(even) {
+    background-color: #f0ece6;
+}
+
+.zone-table tr:nth-child(odd) {
+    background-color: var(--white);
+}
+
+/* Zone note at bottom */
+.zone-note {
+    text-align: center;
+    margin-top: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ================================================
+   FOOTER — Bottom section with socials
+   ================================================ */
+.site-footer {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    padding: 50px 20px 20px 20px;
+    text-align: center;
+}
+
+/* Footer brand name and tagline */
+.footer-brand {
+    margin-bottom: 30px;
+}
+
+.footer-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.footer-tagline {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    font-style: italic;
+}
+
+/* Social links section */
+.footer-socials {
+    margin-bottom: 30px;
+}
+
+.footer-socials p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.65;
+    margin-bottom: 12px;
+}
+
+.social-link {
+    display: inline-block;
+    color: var(--primary-cream);
+    text-decoration: none;
+    border: 1px solid var(--primary-cream);
+    padding: 8px 24px;
+    border-radius: var(--radius);
+    margin: 0 8px;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    letter-spacing: 0.05em;
+}
+
+.social-link:hover {
+    background-color: var(--primary-cream);
+    color: var(--primary-navy);
+}
+
+/* Contact section */
+.footer-contact {
+    margin-bottom: 30px;
+}
+
+.footer-contact p {
+    font-size: 0.85rem;
+    opacity: 0.65;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.footer-phone {
+    color: var(--primary-cream);
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(252, 249, 244, 0.4);
+    padding-bottom: 2px;
+    transition: var(--transition);
+}
+
+.footer-phone:hover {
+    border-bottom-color: var(--primary-cream);
+    opacity: 0.85;
+}
+
+/* Footer bottom copyright line */
+.footer-bottom {
+    border-top: 1px solid rgba(252, 249, 244, 0.2);
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+/* ================================================
+   RESPONSIVE — Tablet (max 768px)
+   ================================================ */
+@media (max-width: 768px) {
+
+    /* Smaller header logo on tablet */
+    .header-logo {
+        width: 240px;
+    }
+
+    /* Tighter nav links */
+    .nav-links {
+        gap: 20px;
+        padding: 14px 16px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+
+    /* Adjust hero text */
+    #book-launch p:first-of-type {
+        font-size: 1.3rem;
+    }
+
+    /* Full width table on tablet */
+    .service-area {
+        padding: 0 16px;
+    }
+
+    /* Stack social links vertically */
+    .social-link {
+        display: block;
+        margin: 8px auto;
+        max-width: 200px;
+    }
+
+}
+
+/* ================================================
+   RESPONSIVE — Mobile (max 480px)
+   ================================================ */
+@media (max-width: 480px) {
+
+    /* Even smaller logo on mobile */
+    .header-logo {
+        width: 180px;
+    }
+
+    .site-header {
+        padding: 20px 16px;
+    }
+
+    /* Stack nav links vertically on very small screens */
+    .nav-links {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    /* Adjust hero section */
+    #book-launch {
+        padding: 40px 16px;
+    }
+
+    #book-launch p:first-of-type {
+        font-size: 1.1rem;
+    }
+
+    #book-launch p {
+        font-size: 1rem;
+    }
+
+    #book-launch button {
+        width: 100%; /* full width button on mobile */
+        padding: 16px;
+    }
+
+    /* Zone table scrollable on mobile */
+    .service-area {
+        padding: 0 12px;
+        overflow-x: auto;
+    }
+
+    .zone-table td,
+    .zone-header th {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .service-area h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Footer adjustments */
+    .site-footer {
+        padding: 40px 16px 16px 16px;
+    }
+
+    .footer-name {
+        font-size: 1.2rem;
+    }
+
+}
