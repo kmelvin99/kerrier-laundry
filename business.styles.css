@@ -217,6 +217,43 @@ body > p {
 }
 
 /* ================================================
+   FAMILY PHOTO — About Page
+   ================================================ */
+
+.about-photo {
+    text-align: center;
+    margin: 0 auto 30px auto;
+}
+
+.family-photo {
+    width: 50%;
+    max-width: 500px;
+    height: fixed;         /* changed from fixed height to auto */
+    object-fit: cover;  /* changed from cover to contain */
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 0 auto;      /* centers the image */
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .family-photo {
+        width: 70%;
+        height: 250px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .family-photo {
+        width: 100%;      /* full width on mobile */
+        height: 200px;
+    }
+}
+
+
+/* ================================================
    FOOTER — Bottom section with socials
    ================================================ */
 .site-footer {
