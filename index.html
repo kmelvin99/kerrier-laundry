@@ -31,78 +31,52 @@
             <!-- Service Area Section -->
         <div class="service-area" id="service-area">
             <h2>Service Areas & Zones</h2>
-            <p>Not sure which zone you fall under? Check the list below!</p>
+           <p>Enter your address below to find your zone and calculate your order total.</p>
 
-        <table class="zone-table">
+            <!-- Calculator Card -->
+            <div class="calculator-card">
 
-            <!-- Zone 1 -->
-            <tr class="zone-header">
-                <th colspan="2">Zone 1 — Within 10 Miles | $30 + $15 per bag</th>
-            </tr>
-            <tr>
-                <td>Franklin, KY</td>
-                <td>~2 miles</td>
-            </tr>
-            <tr>
-                <td>Providence, KY</td>
-                <td>~7 miles</td>
-            </tr>
-            <tr>
-                <td>Mitchellville, TN</td>
-                <td>~8 miles</td>
-            </tr>
+                <!-- Address Input -->
+                <div class="calc-field">
+                    <label for="address-input">Your Address</label>
+                    <input 
+                        type="text" 
+                        id="address-input" 
+                        placeholder="Start typing your address..."
+                        autocomplete="off"
+                    />
+                </div>
 
-            <!-- Zone 2 -->
-            <tr class="zone-header">
-                <th colspan="2">Zone 2 — Within 20 Miles | $35 + $15 per bag</th>
-            </tr>
-            <tr>
-                <td>Portland, TN</td>
-                <td>~12 miles</td>
-            </tr>
-            <tr>
-                <td>Orlinda, TN</td>
-                <td>~13 miles</td>
-            </tr>
-            <tr>
-                <td>White House, TN</td>
-                <td>~20 miles</td>
-            </tr>
+                <!-- Bag Count Input -->
+                <div class="calc-field">
+                    <label for="bag-count">Number of Bags</label>
+                    <div class="bag-counter">
+                        <button type="button" class="bag-btn" id="bag-minus">−</button>
+                        <span id="bag-display">1</span>
+                        <button type="button" class="bag-btn" id="bag-plus">+</button>
+                    </div>
+                </div>
 
-            <!-- Zone 3 -->
-            <tr class="zone-header">
-                <th colspan="2">Zone 3 — Within 30 Miles | $40 + $20 per bag</th>
-            </tr>
-            <tr>
-                <td>Russellville, KY</td>
-                <td>~22 miles</td>
-            </tr>
-            <tr>
-                <td>Scottsville, KY</td>
-                <td>~28 miles</td>
-            </tr>
-            <tr>
-                <td>Bowling Green, KY</td>
-                <td>~28 miles</td>
-            </tr>
-            <!-- Zone 4 -->
-            <tr class="zone-header">
-            <th colspan="2">Zone 4 — Within 40 Miles | $45 + $20 per bag</th>
-            </tr>
-            <tr>
-                <td>Hendersonville, TN</td>
-                <td>~37 miles</td>
-            </tr>
-            <tr>
-                <td>Greenbrier, TN</td>
-                <td>~32 miles</td>
-            </tr>
-            <tr>
-                <td>Pleasant View, TN</td>
-                <td>~38 miles</td>
-            </tr>
-        </table>
-            <p class="zone-note">Don't see your town? Contact us and we will let you know your zone!</p>
+                <!-- Calculate Button -->
+                <button type="button" id="calc-btn">Calculate My Total</button>
+
+                <!-- Result Display -->
+                <div id="calc-result" class="calc-result hidden">
+                    <div class="result-zone" id="result-zone"></div>
+                    <div class="result-distance" id="result-distance"></div>
+                    <div class="result-price" id="result-price"></div>
+                    <div class="result-breakdown" id="result-breakdown"></div>
+                </div>
+
+                <div id="calc-error" class="calc-error hidden"></div>
+                <div id="calc-loading" class="calc-loading hidden">Calculating your zone…</div>
+
+            </div>
+
+            <!-- Map -->
+            <div id="zone-map"></div>
+
+            <p class="zone-note">Outside the 40-mile range? Contact us and we'll see what we can do!</p>
         </div>
     </body>
     <footer class="site-footer">
@@ -121,4 +95,424 @@
             <p>© 2025 Kerrier Laundry Co. All rights reserved.</p>
         </div>
     </footer>
+    
+       <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvf3QRIZA2P_xzQuaoREGWT3rlqEgL8_4&libraries=places,geometry&callback=initMap" async defer></script>
+
+    <script>
+        // ── Constants ──────────────────────────────────────────────
+        const ORIGIN = { lat: 36.6776, lng: -86.5775 }; // Franklin, KY
+        const ORIGIN_ADDRESS = "Franklin, KY 42134";
+
+        const ZONES = [
+            { max: 10, label: "Zone 1", firstBag: 30, extraBag: 15 },
+            { max: 20, label: "Zone 2", firstBag: 35, extraBag: 15 },
+            { max: 30, label: "Zone 3", firstBag: 40, extraBag: 20 },
+            { max: 40, label: "Zone 4", firstBag: 45, extraBag: 20 },
+        ];
+
+        // Zone ring colors (translucent fills)
+        const ZONE_COLORS = ["#163551", "#1e6091", "#2980b9", "#5dade2"];
+
+        // ── State ──────────────────────────────────────────────────
+        let map, autocomplete, distanceService;
+        let bagCount = 1;
+        let userMarker = null;
+
+        // ── Map Init ───────────────────────────────────────────────
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("zone-map"), {
+                center: ORIGIN,
+                zoom: 9,
+                mapTypeId: "roadmap",
+                styles: [
+                    { featureType: "poi", stylers: [{ visibility: "off" }] },
+                    { featureType: "transit", stylers: [{ visibility: "off" }] },
+                    { elementType: "geometry", stylers: [{ color: "#f5f0eb" }] },
+                    { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+                    { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#ddd8d0" }] },
+                    { featureType: "water", stylers: [{ color: "#aacbdd" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#2c2c2c" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#f5f0eb" }] },
+                ],
+            });
+
+            // Draw zone rings (approximate visual circles)
+            const metersPerMile = 1609.34;
+            const ringMiles = [40, 30, 20, 10];
+            ringMiles.forEach((miles, i) => {
+                new google.maps.Circle({
+                    map,
+                    center: ORIGIN,
+                    radius: miles * metersPerMile,
+                    strokeColor: ZONE_COLORS[i],
+                    strokeOpacity: 0.5,
+                    strokeWeight: 1.5,
+                    fillColor: ZONE_COLORS[i],
+                    fillOpacity: 0.06,
+                });
+            });
+
+            // Franklin marker
+            new google.maps.Marker({
+                map,
+                position: ORIGIN,
+                title: "Kerrier Laundry Co. — Franklin, KY",
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: "#163551",
+                    fillOpacity: 1,
+                    strokeColor: "#FCF9F4",
+                    strokeWeight: 2,
+                },
+            });
+
+            // Autocomplete on address input
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById("address-input"),
+                { types: ["address"], componentRestrictions: { country: "us" } }
+            );
+
+            distanceService = new google.maps.DistanceMatrixService();
+        }
+
+        // ── Bag Counter ────────────────────────────────────────────
+        document.getElementById("bag-minus").addEventListener("click", () => {
+            if (bagCount > 1) {
+                bagCount--;
+                document.getElementById("bag-display").textContent = bagCount;
+            }
+        });
+
+        document.getElementById("bag-plus").addEventListener("click", () => {
+            if (bagCount < 20) {
+                bagCount++;
+                document.getElementById("bag-display").textContent = bagCount;
+            }
+        });
+
+        // ── Calculate ──────────────────────────────────────────────
+        document.getElementById("calc-btn").addEventListener("click", calculate);
+
+        function calculate() {
+            const address = document.getElementById("address-input").value.trim();
+            if (!address) {
+                showError("Please enter your address first.");
+                return;
+            }
+
+            hideResult();
+            hideError();
+            showLoading(true);
+
+            distanceService.getDistanceMatrix(
+                {
+                    origins: [ORIGIN_ADDRESS],
+                    destinations: [address],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.IMPERIAL,
+                },
+                handleDistanceResult
+            );
+        }
+
+        function handleDistanceResult(response, status) {
+            showLoading(false);
+
+            if (status !== "OK") {
+                showError("Could not reach Google Maps. Please try again.");
+                return;
+            }
+
+            const element = response.rows[0].elements[0];
+
+            if (element.status === "NOT_FOUND" || element.status === "ZERO_RESULTS") {
+                showError("Address not found. Please try a more specific address.");
+                return;
+            }
+
+            // Distance in miles
+            const meters = element.distance.value;
+            const miles = meters / 1609.34;
+            const milesRounded = Math.round(miles * 10) / 10;
+
+            // Find zone
+            const zone = ZONES.find(z => miles <= z.max);
+
+            if (!zone) {
+                showError("Sorry, your address is outside our 40-mile service area. Please contact us!");
+                return;
+            }
+
+            // Calculate price
+            const total = zone.firstBag + (bagCount > 1 ? (bagCount - 1) * zone.extraBag : 0);
+
+            // Show result
+            displayResult(zone, milesRounded, total, bagCount);
+
+            // Drop a pin on the map
+            const place = autocomplete.getPlace();
+            if (place && place.geometry) {
+                placeUserMarker(place.geometry.location);
+            } else {
+                // Geocode to get coords
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: document.getElementById("address-input").value }, (results, geoStatus) => {
+                    if (geoStatus === "OK" && results[0]) {
+                        placeUserMarker(results[0].geometry.location);
+                    }
+                });
+            }
+        }
+
+        function placeUserMarker(location) {
+            if (userMarker) userMarker.setMap(null);
+            userMarker = new google.maps.Marker({
+                map,
+                position: location,
+                title: "Your Location",
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: "#e74c3c",
+                    fillOpacity: 1,
+                    strokeColor: "#ffffff",
+                    strokeWeight: 2,
+                },
+            });
+            map.panTo(location);
+            map.setZoom(10);
+        }
+
+        function displayResult(zone, miles, total, bags) {
+            document.getElementById("result-zone").textContent = zone.label + " — " + miles + " miles away";
+            document.getElementById("result-distance").textContent =
+                "Within " + zone.max + "-mile service area";
+            document.getElementById("result-price").textContent = "$" + total.toFixed(2);
+
+            let breakdown = "$" + zone.firstBag + " first bag";
+            if (bags > 1) {
+                breakdown += " + " + (bags - 1) + " additional bag" + (bags > 2 ? "s" : "") + " × $" + zone.extraBag;
+            }
+            document.getElementById("result-breakdown").textContent = breakdown;
+
+            document.getElementById("calc-result").classList.remove("hidden");
+        }
+
+        function showError(msg) {
+            const el = document.getElementById("calc-error");
+            el.textContent = msg;
+            el.classList.remove("hidden");
+        }
+
+        function hideError() {
+            document.getElementById("calc-error").classList.add("hidden");
+        }
+
+        function hideResult() {
+            document.getElementById("calc-result").classList.add("hidden");
+        }
+
+        function showLoading(show) {
+            const el = document.getElementById("calc-loading");
+            if (show) el.classList.remove("hidden");
+            else el.classList.add("hidden");
+        }
+    </script>
+
+    <style>
+        /* ── Calculator Card ── */
+        .calculator-card {
+            background: var(--white);
+            border: 1px solid var(--soft-border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .calc-field {
+            margin-bottom: 20px;
+        }
+
+        .calc-field label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .calc-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--soft-border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: Georgia, serif;
+            background: var(--primary-cream);
+            color: var(--text-dark);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .calc-field input:focus {
+            border-color: var(--primary-navy);
+            box-shadow: 0 0 0 3px rgba(22, 53, 81, 0.1);
+        }
+
+        /* Bag counter */
+        .bag-counter {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1px solid var(--soft-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .bag-btn {
+            background: var(--primary-navy);
+            color: var(--primary-cream);
+            border: none;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bag-btn:hover {
+            background: var(--accent-navy);
+        }
+
+        #bag-display {
+            width: 60px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: Georgia, serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 44px;
+        }
+
+        /* Calculate button */
+        #calc-btn {
+            width: 100%;
+            background-color: var(--primary-navy);
+            color: var(--primary-cream);
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-family: Georgia, serif;
+            border-radius: var(--radius);
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            margin-top: 4px;
+        }
+
+        #calc-btn:hover {
+            background-color: var(--accent-navy);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Result box */
+        .calc-result {
+            margin-top: 24px;
+            background: var(--primary-navy);
+            color: var(--primary-cream);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-zone {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .result-distance {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 16px;
+        }
+
+        .result-price {
+            font-size: 2.8rem;
+            font-weight: bold;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .result-breakdown {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Error */
+        .calc-error {
+            margin-top: 16px;
+            background: #fdf0f0;
+            border: 1px solid #e8c0c0;
+            color: #a33;
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Loading */
+        .calc-loading {
+            margin-top: 16px;
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Hidden utility */
+        .hidden { display: none !important; }
+
+        /* Map */
+        #zone-map {
+            width: 100%;
+            height: 400px;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-border);
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            .calculator-card {
+                padding: 20px 16px;
+            }
+            #zone-map {
+                height: 280px;
+            }
+            .result-price {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </html>
