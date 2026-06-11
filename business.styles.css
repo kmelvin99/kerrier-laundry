@@ -252,6 +252,88 @@ body > p {
     }
 }
 
+/* ================================================
+   ZONE PRICING CARDS
+   ================================================ */
+.zone-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 960px;
+    margin: 30px auto 50px auto;
+    padding: 0 20px;
+}
+
+.zone-card {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    border-radius: var(--radius);
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.zone-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(22, 53, 81, 0.2);
+}
+
+.zone-card-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.zone-card-miles {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+}
+
+.zone-card-price {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.zone-card-sub {
+    font-size: 0.8rem;
+    opacity: 0.65;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+
+.zone-card-divider {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(252, 249, 244, 0.3);
+    margin: 0 auto 16px auto;
+}
+
+.zone-card-extra {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .zone-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .zone-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* ================================================
    FOOTER — Bottom section with socials
