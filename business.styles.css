@@ -334,6 +334,217 @@ body > p {
     }
 }
 
+/* ================================================
+   SERVICES PAGE
+   ================================================ */
+.services-hero {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.services-hero h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+}
+
+.services-hero p {
+    font-size: 1rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.services-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.services-section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.services-section-header h2 {
+    font-size: 1.8rem;
+    color: var(--primary-navy);
+    margin-bottom: 10px;
+}
+
+.services-section-header p {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.services-grid--commercial {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.service-card {
+    background: var(--white);
+    border: 1px solid var(--soft-border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(22, 53, 81, 0.12);
+}
+
+.service-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.service-card h3 {
+    font-size: 1.05rem;
+    color: var(--primary-navy);
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.services-pricing-note {
+    background: var(--primary-cream);
+    border: 1px solid var(--soft-border);
+    border-radius: var(--radius);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.services-pricing-note p {
+    color: var(--text-dark);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.services-pricing-note a {
+    color: var(--primary-navy);
+}
+
+.services-pricing-note button {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    border: none;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-family: Georgia, serif;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+}
+
+.services-pricing-note button:hover {
+    background-color: var(--accent-navy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.services-divider {
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 1px;
+    background-color: var(--soft-border);
+}
+
+.services-bottom-cta {
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 60px;
+}
+
+.services-bottom-cta h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.services-bottom-cta p {
+    opacity: 0.75;
+    font-style: italic;
+    margin-bottom: 28px;
+}
+
+.services-bottom-cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: var(--primary-cream);
+    color: var(--primary-navy);
+    border: none;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-family: Georgia, serif;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-cream);
+    border: 1px solid var(--primary-cream);
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-family: Georgia, serif;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-cream);
+    color: var(--primary-navy);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .services-grid,
+    .services-grid--commercial {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .services-grid,
+    .services-grid--commercial {
+        grid-template-columns: 1fr;
+    }
+    .services-hero h1 { font-size: 1.5rem; }
+    .services-bottom-cta h2 { font-size: 1.3rem; }
+}
+
 
 /* ================================================
    FOOTER — Bottom section with socials
