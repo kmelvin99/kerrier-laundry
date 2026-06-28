@@ -393,7 +393,7 @@ function displayResult(zone, miles, total, bags) {
 
     // Silent background log to Google Sheets
     const address = document.getElementById("address-input").value.trim();
-    fetch("https://script.google.com/macros/s/AKfycbzRQ46zK6Vx69efF9eO6KvkLsxB1i2JeyhuljkcjkEvgdgVA2DsV3yQ20CyBAaO4WfFGA/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxF7QDCGzc-PUyxiCWFa4vHBsv99VVOd25hzA7oBHEdBbwPmzrLZxOE-_k74N5FrKTo/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -428,7 +428,7 @@ document.getElementById("lead-submit-btn").addEventListener("click", async funct
 
     try {
         // Update the sheet row with name and phone
-        fetch("https://script.google.com/macros/s/AKfycbzRQ46zK6Vx69efF9eO6KvkLsxB1i2JeyhuljkcjkEvgdgVA2DsV3yQ20CyBAaO4WfFGA/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbxF7QDCGzc-PUyxiCWFa4vHBsv99VVOd25hzA7oBHEdBbwPmzrLZxOE-_k74N5FrKTo/exec", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
