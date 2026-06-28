@@ -123,7 +123,8 @@
                 </div>
 
                 <!-- Calculate Button -->
-                <button type="button" id="calc-btn">Calculate My Total</button>
+                <button type="button" id="calc-btn">Calculate Estimate</button>
+
 
                 <!-- Result Display -->
                 <div id="calc-result" class="calc-result hidden">
@@ -136,6 +137,23 @@
                 <div id="calc-error" class="calc-error hidden"></div>
                 <div id="calc-loading" class="calc-loading hidden">Calculating your zone…</div>
 
+            </div>
+            <!-- STEP 2: Add this block directly after your existing calc-result div -->
+            <div id="lead-capture" class="lead-capture hidden">
+                <p class="lead-capture-heading">Want us to reach out with more details?</p>
+                <p class="lead-capture-sub">No commitment — we'll follow up at your convenience.</p>
+                <div class="lead-fields">
+                    <input type="text" id="lead-name" placeholder="Your Name" autocomplete="name" />
+                    <input type="tel" id="lead-phone" placeholder="Phone Number" autocomplete="tel" />
+                </div>
+                <button type="button" id="lead-submit-btn">Send My Estimate</button>
+                <p class="lead-skip" id="lead-skip">No thanks, just browsing</p>
+                <div id="lead-success" class="lead-success hidden">
+                    ✓ Got it! We'll be in touch soon.
+                </div>
+                <div id="lead-submit-error" class="lead-submit-error hidden">
+                    Something went wrong. Please try again or message us on Facebook.
+                </div>
             </div>
 
             <!-- Map -->
@@ -354,20 +372,85 @@
             map.setZoom(10);
         }
 
-        function displayResult(zone, miles, total, bags) {
-            document.getElementById("result-zone").textContent = zone.label + " — " + miles + " miles away";
-            document.getElementById("result-distance").textContent =
-                "Within " + zone.max + "-mile service area";
-            document.getElementById("result-price").textContent = "$" + total.toFixed(2);
+        // ── Lead Capture Logic ─────────────────────────────────────────
+// Add this inside your existing <script> block, after the displayResult function
 
-            let breakdown = "$" + zone.firstBag + " first bag";
-            if (bags > 1) {
-                breakdown += " + " + (bags - 1) + " additional bag" + (bags > 2 ? "s" : "") + " × $" + zone.extraBag;
-            }
-            document.getElementById("result-breakdown").textContent = breakdown;
+function displayResult(zone, miles, total, bags) {
+    document.getElementById("result-zone").textContent = zone.label + " — " + miles + " miles away";
+    document.getElementById("result-distance").textContent =
+        "Within " + zone.max + "-mile service area";
+    document.getElementById("result-price").textContent = "$" + total.toFixed(2);
 
-            document.getElementById("calc-result").classList.remove("hidden");
+    let breakdown = "$" + zone.firstBag + " first bag";
+    if (bags > 1) {
+        breakdown += " + " + (bags - 1) + " additional bag" + (bags > 2 ? "s" : "") + " × $" + zone.extraBag;
+    }
+    document.getElementById("result-breakdown").textContent = breakdown;
+    document.getElementById("calc-result").classList.remove("hidden");
+
+    // Show lead capture after result
+    document.getElementById("lead-capture").classList.remove("hidden");
+    document.getElementById("lead-success").classList.add("hidden");
+    document.getElementById("lead-submit-error").classList.add("hidden");
+}
+
+// Lead form submission via Formspree
+document.getElementById("lead-submit-btn").addEventListener("click", async function () {
+    const name = document.getElementById("lead-name").value.trim();
+    const phone = document.getElementById("lead-phone").value.trim();
+    const address = document.getElementById("address-input").value.trim();
+    const bags = bagCount;
+    const zone = document.getElementById("result-zone").textContent;
+    const total = document.getElementById("result-price").textContent;
+
+    if (!name || !phone) {
+        document.getElementById("lead-submit-error").textContent = "Please enter your name and phone number.";
+        document.getElementById("lead-submit-error").classList.remove("hidden");
+        return;
+    }
+
+    document.getElementById("lead-submit-btn").textContent = "Sending...";
+    document.getElementById("lead-submit-btn").disabled = true;
+    document.getElementById("lead-submit-error").classList.add("hidden");
+
+    try {
+        const response = await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name,
+                phone,
+                address,
+                bags,
+                zone,
+                estimated_total: total,
+            }),
+        });
+
+        if (response.ok) {
+            document.getElementById("lead-submit-btn").classList.add("hidden");
+            document.getElementById("lead-skip").classList.add("hidden");
+            document.getElementById("lead-fields-wrap") && document.getElementById("lead-fields-wrap").classList.add("hidden");
+            document.getElementById("lead-name").classList.add("hidden");
+            document.getElementById("lead-phone").classList.add("hidden");
+            document.querySelector(".lead-capture-heading").classList.add("hidden");
+            document.querySelector(".lead-capture-sub").classList.add("hidden");
+            document.getElementById("lead-success").classList.remove("hidden");
+        } else {
+            throw new Error("Formspree error");
         }
+        } catch (err) {
+        document.getElementById("lead-submit-btn").textContent = "Send My Estimate";
+        document.getElementById("lead-submit-btn").disabled = false;
+        document.getElementById("lead-submit-error").textContent = "Something went wrong. Please try again or message us on Facebook.";
+        document.getElementById("lead-submit-error").classList.remove("hidden");
+        }
+    });
+
+    // Skip link
+        document.getElementById("lead-skip").addEventListener("click", function () {
+        document.getElementById("lead-capture").classList.add("hidden");
+    });
 
         function showError(msg) {
             const el = document.getElementById("calc-error");
