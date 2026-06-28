@@ -545,6 +545,118 @@ body > p {
     .services-bottom-cta h2 { font-size: 1.3rem; }
 }
 
+/* ================================================
+   LEAD CAPTURE
+   ================================================ */
+.lead-capture {
+    margin-top: 20px;
+    background: var(--white);
+    border: 1px solid var(--soft-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.lead-capture-heading {
+    font-size: 1rem;
+    color: var(--primary-navy);
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.lead-capture-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 18px;
+}
+
+.lead-fields {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.lead-fields input {
+    flex: 1;
+    min-width: 140px;
+    padding: 11px 14px;
+    border: 1px solid var(--soft-border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-family: Georgia, serif;
+    background: var(--primary-cream);
+    color: var(--text-dark);
+    outline: none;
+    transition: var(--transition);
+}
+
+.lead-fields input:focus {
+    border-color: var(--primary-navy);
+    box-shadow: 0 0 0 3px rgba(22, 53, 81, 0.1);
+}
+
+#lead-submit-btn {
+    width: 100%;
+    background-color: var(--primary-navy);
+    color: var(--primary-cream);
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-family: Georgia, serif;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+    margin-bottom: 12px;
+}
+
+#lead-submit-btn:hover {
+    background-color: var(--accent-navy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+#lead-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.lead-skip {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 4px;
+}
+
+.lead-skip:hover {
+    color: var(--text-dark);
+}
+
+.lead-success {
+    color: #2e7d32;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px;
+    background: #f0faf0;
+    border-radius: var(--radius);
+    border: 1px solid #a5d6a7;
+}
+
+.lead-submit-error {
+    color: #a33;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    padding: 10px;
+    background: #fdf0f0;
+    border-radius: var(--radius);
+    border: 1px solid #e8c0c0;
+}
+
 
 /* ================================================
    FOOTER — Bottom section with socials
