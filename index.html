@@ -395,7 +395,8 @@ function displayResult(zone, miles, total, bags) {
     const address = document.getElementById("address-input").value.trim();
     fetch("https://script.google.com/macros/s/AKfycbxF7QDCGzc-PUyxiCWFa4vHBsv99VVOd25hzA7oBHEdBbwPmzrLZxOE-_k74N5FrKTo/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({
             address: address,
             zone: zone.label,
