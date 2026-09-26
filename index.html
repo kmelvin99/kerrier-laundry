@@ -35,6 +35,55 @@
             </div>
         </div>
 
+        <!-- Testimonials Carousel -->
+        <div class="testimonials-section">
+            <h2>What Our Customers Say</h2>
+            <p class="testimonials-sub">Real reviews from real neighbors.</p>
+
+            <div class="testimonials-carousel">
+                <div class="testimonials-track" id="testimonials-track">
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"Great service and great people, we highly recommend using them and saving yourself some time! The folding alone is worth it!"</p>
+                    <p class="testimonial-name">— Caleb Dorris</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"When there is not enough hours in the day, calling them is the answer! Fast and friendly service! Thank you for your quick response and excellent service."</p>
+                    <p class="testimonial-name">— Lesa Stone</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"Such a wonderful resource! They definitely took this chore off my plate, and did it wonderfully. Everything was clean as a whistle and folded — godsend!"</p>
+                    <p class="testimonial-name">— Kimberlee Kerr</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"They picked up a mountain of laundry and I got it back folded and socks paired! Fast, easy, and smelled amazing. Solid service and super friendly too. Not only do I recommend, I am using them from now on."</p>
+                    <p class="testimonial-name">— Torrey Zimmerman</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"As your first customer I'd like to say thanks for taking away 95% of the work. Super easy on my end 👍"</p>
+                    <p class="testimonial-name">— Darkless</p>
+                </div>
+
+            </div>
+
+        <!-- Controls -->
+        <div class="testimonial-controls">
+            <button class="testimonial-btn" id="t-prev">&#8592;</button>
+            <div class="testimonial-dots" id="testimonial-dots"></div>
+            <button class="testimonial-btn" id="t-next">&#8594;</button>
+        </div>
+    </div>
+</div>
+
         <!-- Pricing Section -->
         <div class="pricing-section">
             <h2>Simple, Transparent Pricing</h2>
@@ -400,6 +449,43 @@
             if (show) el.classList.remove("hidden");
             else el.classList.add("hidden");
         }
+
+        // ── Testimonials Carousel ──────────────────────────────────────
+(function () {
+    const track = document.getElementById("testimonials-track");
+    const dotsContainer = document.getElementById("testimonial-dots");
+    const cards = document.querySelectorAll(".testimonial-card");
+    let current = 0;
+    let autoPlay;
+
+    // Build dots
+    cards.forEach((_, i) => {
+        const dot = document.createElement("div");
+        dot.classList.add("testimonial-dot");
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goTo(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    function goTo(index) {
+        cards[current].classList.remove("active");
+        dotsContainer.children[current].classList.remove("active");
+        current = (index + cards.length) % cards.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsContainer.children[current].classList.add("active");
+        resetAutoPlay();
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    document.getElementById("t-prev").addEventListener("click", () => goTo(current - 1));
+    document.getElementById("t-next").addEventListener("click", () => goTo(current + 1));
+
+    resetAutoPlay();
+})();
     </script>
 
     <style>
