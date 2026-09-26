@@ -1384,4 +1384,116 @@ body > p {
         height: 46px;
     }
 
+   /* ================================================
+   TESTIMONIALS CAROUSEL
+   ================================================ */
+   .testimonials-section {
+       background-color: var(--primary-navy);
+       color: var(--primary-cream);
+       text-align: center;
+       padding: 60px 20px;
+   }
+
+   .testimonials-section h2 {
+       font-size: 1.8rem;
+       margin-bottom: 8px;
+       letter-spacing: 0.03em;
+   }
+
+   .testimonials-sub {
+       font-size: 0.95rem;
+       opacity: 0.7;
+       font-style: italic;
+       margin-bottom: 36px;
+   }
+
+   .testimonials-carousel {
+       max-width: 700px;
+       margin: 0 auto;
+       position: relative;
+       overflow: hidden;
+   }
+
+   .testimonials-track {
+       display: flex;
+       transition: transform 0.5s ease;
+   }
+
+   .testimonial-card {
+       min-width: 100%;
+       padding: 0 10px;
+       box-sizing: border-box;
+   }
+
+   .testimonial-stars {
+       font-size: 1.4rem;
+       color: #f4c542;
+       margin-bottom: 16px;
+       letter-spacing: 0.1em;
+   }
+
+   .testimonial-quote {
+       font-size: 1.05rem;
+       line-height: 1.8;
+       opacity: 0.92;
+       font-style: italic;
+       margin-bottom: 20px;
+   }
+
+   .testimonial-name {
+       font-size: 0.9rem;
+       opacity: 0.65;
+       text-transform: uppercase;
+       letter-spacing: 0.1em;
+   }
+
+   .testimonial-controls {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       gap: 20px;
+       margin-top: 32px;
+   }
+
+   .testimonial-btn {
+       background: rgba(252, 249, 244, 0.15);
+       color: var(--primary-cream);
+       border: 1px solid rgba(252, 249, 244, 0.3);
+       width: 40px;
+       height: 40px;
+       border-radius: 50%;
+       font-size: 1rem;
+       cursor: pointer;
+       transition: var(--transition);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+   }
+
+   .testimonial-btn:hover {
+       background: rgba(252, 249, 244, 0.3);
+   }
+
+   .testimonial-dots {
+       display: flex;
+       gap: 8px;
+   }
+
+   .testimonial-dot {
+       width: 8px;
+       height: 8px;
+       border-radius: 50%;
+       background: rgba(252, 249, 244, 0.3);
+       cursor: pointer;
+       transition: var(--transition);
+   }
+
+   .testimonial-dot.active {
+       background: var(--primary-cream);
+   }
+   
+   @media (max-width: 480px) {
+       .testimonials-section h2 { font-size: 1.4rem; }
+       .testimonial-quote { font-size: 0.95rem; }
+   }
 }
