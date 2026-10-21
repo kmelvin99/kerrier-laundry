@@ -231,16 +231,14 @@
         "telephone": "+1-270-776-2464",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "602 Wittland Drive",
             "addressLocality": "Franklin",
             "addressRegion": "KY",
-            "postalCode": "42134",
             "addressCountry": "US"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 36.7112,
-            "longitude": -86.5697
+            "latitude": 36.7223,
+            "longitude": -86.5772
         },
         "areaServed": [
             { "@type": "City", "name": "Franklin, KY" },
@@ -251,8 +249,8 @@
                 "@type": "GeoCircle",
                 "geoMidpoint": {
                     "@type": "GeoCoordinates",
-                    "latitude": 36.7112,
-                    "longitude": -86.5697
+                    "latitude": 36.7223,
+                    "longitude": -86.5772
                 },
                 "geoRadius": "24140"
             }
@@ -268,8 +266,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvf3QRIZA2P_xzQuaoREGWT3rlqEgL8_4&libraries=places,geometry&callback=initMap" async defer></script>
 
     <script>
-        const ORIGIN = { lat: 36.7112, lng: -86.5697 };
-        const ORIGIN_ADDRESS = "602 Wittland Drive, Franklin, KY 42134";
+        const ORIGIN = { lat: 36.7223, lng: -86.5772 };
         const SERVICE_RADIUS_MILES = 15;
         const EXTRA_MILE_RATE = 0.89;
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxF7QDCGzc-PUyxiCWFa4vHBsv99VVOd25hzA7oBHEdBbwPmzrLZxOE-_k74N5FrKTo/exec";
@@ -336,7 +333,7 @@
             showLoading(true);
             distanceService.getDistanceMatrix(
                 {
-                    origins: [ORIGIN_ADDRESS],
+                    origins: [ORIGIN],
                     destinations: [address],
                     travelMode: google.maps.TravelMode.DRIVING,
                     unitSystem: google.maps.UnitSystem.IMPERIAL,
