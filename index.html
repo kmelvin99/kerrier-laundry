@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TRHVRLHR');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE5SQEG4XH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WE5SQEG4XH');
+    </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kerrier Laundry Co — Franklin, KY</title>
     <meta name="description" content="Kerrier Laundry Co offers laundry pickup, wash, fold and delivery in Franklin, KY and surrounding areas within 15 miles. Book online or call us today!">
-    <link rel="stylesheet" href="business.styles.css?v=3">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.kerrierlaundryco.com/">
+    <link rel="stylesheet" href="business.styles.css?v=4">
 </head>
 <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TRHVRLHR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div class="site-header">
         <img 
@@ -29,6 +53,7 @@
 
     <!-- Hero -->
     <div id="book-launch">
+        <h1>Laundry Pickup &amp; Delivery in Franklin, KY</h1>
         <p>Need help with a load or two? Let us help!</p>
         <p>Schedule a pickup and get your time back!</p>
         <div class="hero-actions">
@@ -107,13 +132,16 @@
                 </div>
             </div>
             <div class="pricing-card-single-footer">
-                Minimum order $25 — includes your first bag and delivery
+                Minimum order $25 — includes your first bag and delivery<br>
+                Beyond 15 miles? Add $0.89/mile.
             </div>
         </div>
 
         <div class="pricing-note">
             <p>💰 <strong>First time customer?</strong> Save 10% on your first order.</p>
-            <p>🔄 <strong>Recurring service?</strong> Save at least 15% every time.</p>
+            <p>🔄 <strong>Recurring service?</strong> Save 10% every time.</p>
+            <p>⭐ <strong>Start recurring on your first order?</strong> Get 20% off that first order (e.g. $25 → $20.00).</p>
+            <p>Discounts apply to your full order total, including pickup &amp; delivery.</p>
         </div>
     </div>
 
@@ -163,6 +191,7 @@
         </div>
 
         <div id="zone-map"></div>
+        <p class="zone-note">Our service area is measured in driving miles from Franklin, KY, so the circle on the map is approximate.</p>
 
         <p class="zone-note">Outside our area? Contact us — we'll always do our best to work something out!</p>
     </div>
@@ -182,7 +211,7 @@
             <a href="https://www.instagram.com/kerrierlaundry/" target="_blank" class="social-link">Instagram</a>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Kerrier Laundry Co. All rights reserved.</p>
+            <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
         </div>
     </footer>
 
@@ -192,13 +221,56 @@
         </svg>
     </a>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "DryCleaningOrLaundry",
+        "name": "Kerrier Laundry Co.",
+        "description": "Family owned laundry pickup, wash, fold and delivery service based in Franklin, KY, serving Franklin and communities within 15 miles.",
+        "url": "https://www.kerrierlaundryco.com",
+        "telephone": "+1-270-776-2464",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "602 Wittland Drive",
+            "addressLocality": "Franklin",
+            "addressRegion": "KY",
+            "postalCode": "42134",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 36.7112,
+            "longitude": -86.5697
+        },
+        "areaServed": [
+            { "@type": "City", "name": "Franklin, KY" },
+            { "@type": "AdministrativeArea", "name": "Simpson County, KY" },
+            { "@type": "City", "name": "Woodburn, KY" },
+            { "@type": "City", "name": "Mitchellville, TN" },
+            {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 36.7112,
+                    "longitude": -86.5697
+                },
+                "geoRadius": "24140"
+            }
+        ],
+        "sameAs": [
+            "https://www.facebook.com/profile.php?id=61589653617028",
+            "https://www.instagram.com/kerrierlaundry/"
+        ]
+    }
+    </script>
+
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvf3QRIZA2P_xzQuaoREGWT3rlqEgL8_4&libraries=places,geometry&callback=initMap" async defer></script>
 
     <script>
         const ORIGIN = { lat: 36.7112, lng: -86.5697 };
         const ORIGIN_ADDRESS = "602 Wittland Drive, Franklin, KY 42134";
-        const SERVICE_RADIUS_MILES = 11;
+        const SERVICE_RADIUS_MILES = 15;
         const EXTRA_MILE_RATE = 0.89;
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxF7QDCGzc-PUyxiCWFa4vHBsv99VVOd25hzA7oBHEdBbwPmzrLZxOE-_k74N5FrKTo/exec";
 
@@ -295,11 +367,11 @@
                 });
             }
 
-            if (miles <= 15) {
+            if (miles <= SERVICE_RADIUS_MILES) {
                 silentLog({ address, miles: milesRounded, zone: "In Zone", bags: "—", total: "—", name: "—", phone: "—" });
                 displayInZone(milesRounded);
             } else {
-                const extraMiles = Math.ceil(miles - 15);
+                const extraMiles = Math.ceil(miles - SERVICE_RADIUS_MILES);
                 const extraCharge = (extraMiles * EXTRA_MILE_RATE).toFixed(2);
                 silentLog({ address, miles: milesRounded, zone: "Out of Zone", bags: "—", total: "—", name: "—", phone: "—" });
                 displayOutOfZone(milesRounded, extraMiles, extraCharge);
@@ -316,7 +388,7 @@
 
         function displayOutOfZone(miles, extraMiles, extraCharge) {
             document.getElementById("out-zone-title").textContent = "You're " + miles + " miles away — just outside our standard area.";
-            document.getElementById("out-zone-msg").textContent = "You are " + extraMiles + " mile" + (extraMiles > 1 ? "s" : "") + " outside our 15-mile zone. An additional mileage fee of $" + extraCharge + " (" + extraMiles + " mi × $0.89) would apply on top of standard pricing. Leave your details and we'll reach out to discuss!";
+            document.getElementById("out-zone-msg").textContent = "You are " + extraMiles + " mile" + (extraMiles > 1 ? "s" : "") + " outside our " + SERVICE_RADIUS_MILES + "-mile zone. An additional mileage fee of $" + extraCharge + " (" + extraMiles + " mi × $" + EXTRA_MILE_RATE.toFixed(2) + ") would apply on top of standard pricing. Leave your details and we'll reach out to discuss!";
             document.getElementById("out-of-zone").classList.remove("hidden");
         }
 
@@ -448,6 +520,10 @@
             }, { threshold: 0.15 });
             document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
         })();
+    </script>
+
+    <script>
+        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
     </script>
 
 </body>

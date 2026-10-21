@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Services — Kerrier Laundry Co</title>
-        <meta name="description" content="Kerrier Laundry Co offers residential laundry pickup, wash, fold and delivery in Franklin KY and surrounding areas. We also serve Airbnb and short term rental hosts with commercial linen services.">
-    </head>
-    <link rel="stylesheet" href="business.styles.css?v=2">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TRHVRLHR');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE5SQEG4XH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WE5SQEG4XH');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Kerrier Laundry Co</title>
+    <meta name="description" content="Kerrier Laundry Co offers residential laundry pickup, wash, fold and delivery in Franklin KY and surrounding areas. We also serve Airbnb and short term rental hosts with commercial linen services.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.kerrierlaundryco.com/services.html">
+    <link rel="stylesheet" href="business.styles.css?v=4">
+</head>
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TRHVRLHR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div class="site-header">
         <img 
             src="https://res.cloudinary.com/dmwtfsqz5/image/upload/Kerrier_Title_Card_texdzt.png" 
@@ -23,7 +49,7 @@
             <a href="faq.html">FAQ</a>
         </div>
     </nav>
-    <body>
+
 
         <!-- Hero -->
         <div class="services-hero">
@@ -54,8 +80,8 @@
 
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
-                    <h3>24-Hour Turnaround</h3>
-                    <p>We deliver your clean laundry within 24 hours of pickup. Need a specific drop-off time? Just let us know and we'll work around your schedule.</p>
+                    <h3>24–48 Hour Turnaround</h3>
+                    <p>We deliver your clean laundry within 24–48 hours of pickup. Need a specific drop-off time? Just let us know and we'll work around your schedule.</p>
                 </div>
 
                 <div class="service-card">
@@ -73,14 +99,14 @@
                 <div class="service-card">
                     <div class="service-icon">🔄</div>
                     <h3>Recurring Service</h3>
-                    <p>Set up a regular schedule and save at least 10% on every order. Perfect for busy households who want clean laundry without ever thinking about it.</p>
+                    <p>Set up a regular schedule and save 10% on every order — or 20% off your first order when you sign up for recurring service. Perfect for busy households who want clean laundry without ever thinking about it.</p>
                 </div>
 
             </div>
 
             <!-- Residential pricing note -->
             <div class="services-pricing-note">
-                <p>Residential pricing is zone-based starting at <strong>$20 for your first bag*</strong>. Use our <a href="index.html#service-area">custom map</a> to find if you are within range.</p>
+                <p>Residential pricing: <strong>$20 first bag</strong>, <strong>$15 each additional bag</strong>, plus <strong>$5 pickup &amp; delivery</strong> within 15 miles ($0.89/mile beyond 15). Use our <a href="index.html#service-area">map</a> to check your address.</p>
                 <a href="scheduling_page.html"><button>Book a Residential Pickup</button></a>
             </div>
         </div>
@@ -134,8 +160,6 @@
             </div>
         </div>
 
-    </body>
-
     <footer class="site-footer">
         <div class="footer-brand">
             <p class="footer-name">Kerrier Laundry Co.</p>
@@ -151,7 +175,7 @@
             <a href="https://www.instagram.com/kerrierlaundry/" target="_blank" class="social-link">Instagram</a>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Kerrier Laundry Co. All rights reserved.</p>
+            <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
         </div>
     </footer>
 
@@ -162,4 +186,9 @@
         </svg>
     </a>
 
+    <script>
+        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
+    </script>
+
+</body>
 </html>
