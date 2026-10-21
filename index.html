@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
-    <link rel="stylesheet" href="premium.css?v=1">
+    <link rel="stylesheet" href="business.styles.css?v=5">
     <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -101,7 +101,7 @@
                         <span><strong>Back in 24–48 hours</strong>Washed, dried &amp; folded</span>
                     </div>
                     <figure class="float-chip chip-bottom">
-                        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                         <q>The folding alone is worth it!</q>
                         <figcaption class="who">Caleb Dorris</figcaption>
                     </figure>
@@ -228,35 +228,35 @@
                 <ul class="review-track reveal" id="testimonials-track" tabindex="0" aria-label="Customer reviews">
                     <li class="review">
                         <figure>
-                            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                             <blockquote>“Great service and great people, we highly recommend using them and saving yourself some time! The folding alone is worth it!”</blockquote>
                             <figcaption><span class="avatar" aria-hidden="true">C</span>Caleb Dorris</figcaption>
                         </figure>
                     </li>
                     <li class="review">
                         <figure>
-                            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                             <blockquote>“When there is not enough hours in the day, calling them is the answer! Fast and friendly service! Thank you for your quick response and excellent service.”</blockquote>
                             <figcaption><span class="avatar" aria-hidden="true">L</span>Lesa Stone</figcaption>
                         </figure>
                     </li>
                     <li class="review">
                         <figure>
-                            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                             <blockquote>“Such a wonderful resource! They definitely took this chore off my plate, and did it wonderfully. Everything was clean as a whistle and folded — godsend!”</blockquote>
                             <figcaption><span class="avatar" aria-hidden="true">K</span>Kimberlee Kerr</figcaption>
                         </figure>
                     </li>
                     <li class="review">
                         <figure>
-                            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                             <blockquote>“They picked up a mountain of laundry and I got it back folded and socks paired! Fast, easy, and smelled amazing. Solid service and super friendly too. Not only do I recommend, I am using them from now on.”</blockquote>
                             <figcaption><span class="avatar" aria-hidden="true">T</span>Torrey Zimmerman</figcaption>
                         </figure>
                     </li>
                     <li class="review">
                         <figure>
-                            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                             <blockquote>“As your first customer I'd like to say thanks for taking away 95% of the work. Super easy on my end 👍”</blockquote>
                             <figcaption><span class="avatar" aria-hidden="true">D</span>Darkless</figcaption>
                         </figure>
@@ -651,45 +651,13 @@
             });
         })();
 
-        // ── Header: shadow on scroll + mobile menu ─────────────────
-        (function () {
-            const header = document.getElementById("site-header");
-            const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
-            window.addEventListener("scroll", onScroll, { passive: true });
-            onScroll();
-
-            const toggle = document.getElementById("menu-toggle");
-            const nav = document.getElementById("main-nav");
-            function setMenu(open) {
-                nav.classList.toggle("is-open", open);
-                toggle.setAttribute("aria-expanded", String(open));
-                toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-            }
-            toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
-            nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
-            document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
-        })();
-
         // ── "Check your address" focuses the address field ─────────
         document.getElementById("hero-check").addEventListener("click", function () {
             setTimeout(() => document.getElementById("address-input").focus({ preventScroll: true }), 500);
         });
 
-        // ── Reveal on scroll (skipped for reduced motion) ──────────
-        (function () {
-            const els = document.querySelectorAll(".reveal");
-            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            if (reduce || !("IntersectionObserver" in window)) { els.forEach(el => el.classList.add("is-visible")); return; }
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
-                });
-            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-            els.forEach(el => observer.observe(el));
-        })();
-
-        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
     </script>
+    <script src="site.js?v=5" defer></script>
 
 </body>
 </html>

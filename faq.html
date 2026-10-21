@@ -25,7 +25,13 @@
     <meta name="description" content="Frequently asked questions about Kerrier Laundry Co's laundry pickup and delivery service in Franklin, KY. Learn about pricing, turnaround time, detergent, and more.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.kerrierlaundryco.com/faq.html">
-    <link rel="stylesheet" href="business.styles.css?v=4">
+    <meta name="theme-color" content="#FCF9F4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
+    <link rel="stylesheet" href="business.styles.css?v=5">
+    <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
@@ -34,217 +40,290 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="site-header">
-        <img 
-            src="https://res.cloudinary.com/dmwtfsqz5/image/upload/Kerrier_Title_Card_texdzt.png" 
-            alt="Kerrier Laundry Co."
-            class="header-logo">
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="scheduling_page.html">Book Now</a>
-            <a href="about.html">About Us</a>
-            <a href="faq.html">FAQ</a>
-        </div>
-    </nav>
-
-    <div class="faq-hero">
-        <h1>Frequently Asked Questions</h1>
-    </div>
-
-    <div class="faq-container">
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                What size bag are your prices based on?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>Our pricing is based on a standard trash bag, which holds approximately 15 lbs of laundry. How much you fill it is completely up to you!</p>
+    <header class="site-header" id="site-header">
+        <div class="wrap header-inner">
+            <a href="index.html" class="brand" aria-label="Kerrier Laundry Co. — Home">
+                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42">
+            </a>
+            <nav class="main-nav" id="main-nav" aria-label="Main">
+                <ul>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="index.html#how">How it works</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html" aria-current="page">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:+12707762464" class="header-phone">(270) 776-2464</a>
+                <a href="scheduling_page.html" class="btn btn-primary btn-sm">Book<span class="hide-xs"> a Pickup</span></a>
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span></button>
             </div>
         </div>
+    </header>
 
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                What does it cost?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>Our pricing is simple — <strong>$20 for your first bag</strong> and <strong>$15 for each additional bag</strong>, plus a flat <strong>$5 pickup and delivery fee</strong> per order. Your minimum order total is $25. No hidden fees.</p>
+    <main id="main">
+
+        <section class="page-hero">
+            <div class="wrap">
+                <span class="eyebrow reveal">FAQ</span>
+                <h1 class="reveal" style="--d:.08s">Frequently Asked <em>Questions</em></h1>
+                <p class="lede reveal" style="--d:.16s">Everything you need to know about pricing, pickup, detergents and turnaround. Can't find your answer? We're a call or text away.</p>
             </div>
-        </div>
+        </section>
 
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                Are there any additional fees?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>The only additional fees are for same-day delivery, for addresses more than 15 driving miles from Franklin (<strong>$0.89 per mile</strong> beyond 15, rounded up to the next whole mile), or if you require items to be hung — in which case we charge for hangers to make your experience as seamless as possible.</p>
+        <section class="section">
+            <div class="wrap faq-layout">
+                <aside class="faq-aside reveal">
+                    <span class="eyebrow">Still have a question?</span>
+                    <h2>We're happy <em>to help.</em></h2>
+                    <p>Message us on Facebook or call or text (270) 776-2464 and we'll get right back to you.</p>
+                    <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="btn btn-primary">Message Us on Facebook</a>
+                    <a href="tel:+12707762464" class="btn btn-ghost">Call or Text Us</a>
+                </aside>
+                <ul class="faq-list reveal" style="--d:.1s">
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">What size bag are your prices based on?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+                            <p>Our pricing is based on one standard kitchen-size trash bag, which holds about 15 lbs of laundry. How much you fill it is completely up to you!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">What does it cost?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+                            <p>Our pricing is simple — <strong>$20 for your first bag</strong> and <strong>$15 for each additional bag</strong>, plus a flat <strong>$5 pickup and delivery fee</strong> per order. Your minimum order total is $25. No hidden fees.</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">Are there any additional fees?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+                            <p>The only additional fees are for same-day delivery, for addresses more than 15 driving miles from Franklin (<strong>$0.89 per mile</strong> beyond 15, rounded up to the next whole mile), or if you require items to be hung — in which case we charge for hangers to make your experience as seamless as possible.</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">How do I pay?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+                            <p>We currently accept <strong>Cash, Cash App, Zelle, and PayPal</strong>. We are also looking to expand to card transactions in the future!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">Do you offer any discounts?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+                            <p>We do! We offer <strong>10% off</strong> your first service, and <strong>10% off</strong> for customers who opt in to recurring services. Sign up for recurring service on your first order and get <strong>20% off</strong> that first order (for example, $25 becomes $20.00). Discounts apply to your full order total, including the pickup &amp; delivery fee. We also run promotions regularly — keep an eye on our socials for those deals!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">Do you wash everything together or separate by color?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+                            <p>It depends on the load. If a load only has one white item, we'll wash it together with the other clothes. However, if there's a large load of colored clothes and a separate load of whites, we'll wash them separately. We always use our best judgment to care for your clothes properly.</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">What happens if something gets damaged or lost?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a7" role="region" aria-labelledby="faq-q7" hidden>
+                            <p>We do our due diligence to note every item that passes through our machines and handle each customer's clothes with care. If you notice something is missing, bring it to our attention right away — we'll search for the item first, and if unsuccessful, we'll do our best to compensate for the lost item.</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">How do I give you my laundry?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a8" role="region" aria-labelledby="faq-q8" hidden>
+                            <p>Simply pack your laundry in your bag and we'll pick it up at your scheduled time. You can leave it on the porch or hand it directly to us when we knock — whatever works best for you!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a9" id="faq-q9">How long does it take to get my laundry back?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a9" role="region" aria-labelledby="faq-q9" hidden>
+                            <p>We deliver your clothes within <strong>24–48 hours of pickup</strong>. Need a specific drop-off time? Just let us know and we'll work around your schedule!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a10" id="faq-q10">Can I use my own detergent?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a10" role="region" aria-labelledby="faq-q10" hidden>
+                            <p>We provide the detergent, but you're welcome to request a specific detergent of your choosing. If it's something we don't already have, we'll go out and get it to make sure your clothes are done exactly to your liking — and it's all included in the listed prices!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a11" id="faq-q11">What detergent do you use?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a11" role="region" aria-labelledby="faq-q11" hidden>
+                            <p>Our standard detergents include trusted brands like <strong>Gain, Tide, and Arm &amp; Hammer</strong>. If you have a preference or a sensitivity, just let us know!</p>
+                        </div>
+                    </li>
+                    <li class="faq-item">
+                        <h3><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a12" id="faq-q12">How do I schedule a pickup?<span class="faq-icon" aria-hidden="true"></span></button></h3>
+                        <div class="faq-answer" id="faq-a12" role="region" aria-labelledby="faq-q12" hidden>
+                            <p>You can book online through our <a href="scheduling_page.html">booking page</a>, call or text us at <a href="tel:+12707762464">(270) 776-2464</a>, or send us a DM on <a href="https://m.me/61589653617028" target="_blank" rel="noopener">Facebook</a>. Whatever is easiest for you!</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </section>
 
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                How do I pay?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>We currently accept <strong>Cash, Cash App, Zelle, and PayPal</strong>. We are also looking to expand to card transactions in the future!</p>
+        <section class="closing">
+            <div class="wrap reveal">
+                <span class="eyebrow eyebrow--center">Affordable luxury, at your door</span>
+                <h2>Ready to get <em>your time back?</em></h2>
+                <p>Book a pickup in a minute and we will take it from there.</p>
+                <div class="ctas">
+                    <a href="scheduling_page.html" class="btn btn-light">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                    <a href="tel:+12707762464" class="btn btn-outline-light">Call or text (270) 776-2464</a>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                Do you offer any discounts?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>We do! We offer <strong>10% off</strong> your first service, and <strong>10% off</strong> for customers who opt in to recurring services. Sign up for recurring service on your first order and get <strong>20% off</strong> that first order (for example, $25 becomes $20.00). Discounts apply to your full order total, including the pickup &amp; delivery fee. We also run promotions regularly — keep an eye on our socials for those deals!</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                Do you wash everything together or separate by color?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>It depends on the load. If a load only has one white item, we'll wash it together with the other clothes. However, if there's a large load of colored clothes and a separate load of whites, we'll wash them separately. We always use our best judgment to care for your clothes properly.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                What happens if something gets damaged or lost?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>We do our due diligence to note every item that passes through our machines and handle each customer's clothes with care. If you notice something is missing, bring it to our attention right away — we'll search for the item first, and if unsuccessful, we'll do our best to compensate for the lost item.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                How do I give you my laundry?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>Simply pack your laundry in your bag and we'll pick it up at your scheduled time. You can leave it on the porch or hand it directly to us when we knock — whatever works best for you!</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                How long does it take to get my laundry back?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>We deliver your clothes within <strong>24–48 hours of pickup</strong>. Need a specific drop-off time? Just let us know and we'll work around your schedule!</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                Can I use my own detergent?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>We provide the detergent, but you're welcome to request a specific detergent of your choosing. If it's something we don't already have, we'll go out and get it to make sure your clothes are done exactly to your liking — and it's all included in the listed prices!</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                What detergent do you use?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>Our standard detergents include trusted brands like <strong>Gain, Tide, and Arm & Hammer</strong>. If you have a preference or a sensitivity, just let us know!</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-                How do I schedule a pickup?
-                <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>You can book online through our <a href="scheduling_page.html">booking page</a>, call or text us at <a href="tel:+12707762464">(270) 776-2464</a>, or send us a DM on <a href="https://m.me/61589653617028" target="_blank">Facebook</a>. Whatever is easiest for you!</p>
-            </div>
-        </div>
-
-        <div class="faq-cta">
-            <p>Still have a question?</p>
-            <div class="faq-cta-btns">
-                <a href="https://m.me/61589653617028" target="_blank"><button>Message Us on Facebook</button></a>
-                <a href="tel:+12707762464"><button>Call or Text Us</button></a>
-            </div>
-        </div>
-
-    </div>
+    </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <p class="footer-name">Kerrier Laundry Co.</p>
-            <p class="footer-tagline">We pick it up. We bring it back clean.</p>
-        </div>
-        <div class="footer-contact">
-            <p>Call or Text</p>
-            <a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a>
-        </div>
-        <div class="footer-socials">
-            <p>Follow Us</p>
-            <a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" class="social-link">Facebook</a>
-            <a href="https://www.instagram.com/kerrierlaundry/" target="_blank" class="social-link">Instagram</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-name">Kerrier<span>Laundry Co</span></p>
+                    <p class="footer-tagline">We pick it up. We bring it back clean.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="scheduling_page.html">Book Now</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Call or Text</h4>
+                    <ul>
+                        <li><a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a></li>
+                        <li>Franklin, KY</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/kerrierlaundry/" target="_blank" rel="noopener">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+                <p>Family-owned in Franklin, KY</p>
+            </div>
         </div>
     </footer>
 
-    <a href="https://m.me/61589653617028" target="_blank" class="fb-chat-btn" title="Chat with us on Facebook">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26">
+    <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="fb-chat-btn" aria-label="Chat with us on Facebook Messenger" title="Chat with us on Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.836 1.395 5.365 3.578 7.02V21l2.796-1.538A10.6 10.6 0 0 0 12 19.486c5.523 0 10-4.144 10-9.243S17.523 2 12 2zm1.008 12.44-2.55-2.72-4.976 2.72 5.476-5.816 2.612 2.72 4.914-2.72-5.476 5.816z"/>
         </svg>
     </a>
 
-    <script>
-        document.querySelectorAll(".faq-question").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const answer = btn.nextElementSibling;
-                const isOpen = btn.getAttribute("aria-expanded") === "true";
-                document.querySelectorAll(".faq-question").forEach(b => {
-                    b.setAttribute("aria-expanded", "false");
-                    b.nextElementSibling.classList.remove("open");
-                });
-                if (!isOpen) {
-                    btn.setAttribute("aria-expanded", "true");
-                    answer.classList.add("open");
-                }
-            });
-        });
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What size bag are your prices based on?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our pricing is based on one standard kitchen-size trash bag, which holds about 15 lbs of laundry. How much you fill it is completely up to you!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does it cost?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our pricing is simple — $20 for your first bag and $15 for each additional bag, plus a flat $5 pickup and delivery fee per order. Your minimum order total is $25. No hidden fees."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are there any additional fees?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The only additional fees are for same-day delivery, for addresses more than 15 driving miles from Franklin ($0.89 per mile beyond 15, rounded up to the next whole mile), or if you require items to be hung — in which case we charge for hangers to make your experience as seamless as possible."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I pay?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We currently accept Cash, Cash App, Zelle, and PayPal. We are also looking to expand to card transactions in the future!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do you offer any discounts?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We do! We offer 10% off your first service, and 10% off for customers who opt in to recurring services. Sign up for recurring service on your first order and get 20% off that first order (for example, $25 becomes $20.00). Discounts apply to your full order total, including the pickup & delivery fee. We also run promotions regularly — keep an eye on our socials for those deals!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do you wash everything together or separate by color?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on the load. If a load only has one white item, we'll wash it together with the other clothes. However, if there's a large load of colored clothes and a separate load of whites, we'll wash them separately. We always use our best judgment to care for your clothes properly."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What happens if something gets damaged or lost?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We do our due diligence to note every item that passes through our machines and handle each customer's clothes with care. If you notice something is missing, bring it to our attention right away — we'll search for the item first, and if unsuccessful, we'll do our best to compensate for the lost item."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I give you my laundry?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Simply pack your laundry in your bag and we'll pick it up at your scheduled time. You can leave it on the porch or hand it directly to us when we knock — whatever works best for you!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does it take to get my laundry back?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We deliver your clothes within 24–48 hours of pickup. Need a specific drop-off time? Just let us know and we'll work around your schedule!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I use my own detergent?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We provide the detergent, but you're welcome to request a specific detergent of your choosing. If it's something we don't already have, we'll go out and get it to make sure your clothes are done exactly to your liking — and it's all included in the listed prices!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What detergent do you use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our standard detergents include trusted brands like Gain, Tide, and Arm & Hammer. If you have a preference or a sensitivity, just let us know!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I schedule a pickup?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can book online through our booking page, call or text us at (270) 776-2464, or send us a DM on Facebook. Whatever is easiest for you!"
+            }
+        }
+    ]
+}
     </script>
 
-    <style>
-        .faq-cta-btns {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .faq-answer a {
-            color: var(--primary-navy);
-        }
-    </style>
-
-    <script>
-        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
-    </script>
+    <script src="site.js?v=5" defer></script>
 
 </body>
 </html>

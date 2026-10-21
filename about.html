@@ -25,7 +25,13 @@
     <meta name="description" content="Meet Kelly and Maranda, the family behind Kerrier Laundry Co. — a family owned mobile laundry pickup and delivery service based in Franklin, KY. We give your time back.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.kerrierlaundryco.com/about.html">
-    <link rel="stylesheet" href="business.styles.css?v=4">
+    <meta name="theme-color" content="#FCF9F4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
+    <link rel="stylesheet" href="business.styles.css?v=5">
+    <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
@@ -34,85 +40,151 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="site-header">
-        <img 
-            src="https://res.cloudinary.com/dmwtfsqz5/image/upload/Kerrier_Title_Card_texdzt.png" 
-            alt="Kerrier Laundry Co. - Mobile Laundry Service Franklin KY"
-            class="header-logo">
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="scheduling_page.html">Book Now</a>
-            <a href="about.html">About Us</a>
-            <a href="faq.html">FAQ</a>
+    <header class="site-header" id="site-header">
+        <div class="wrap header-inner">
+            <a href="index.html" class="brand" aria-label="Kerrier Laundry Co. — Home">
+                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42">
+            </a>
+            <nav class="main-nav" id="main-nav" aria-label="Main">
+                <ul>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="index.html#how">How it works</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="about.html" aria-current="page">About</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:+12707762464" class="header-phone">(270) 776-2464</a>
+                <a href="scheduling_page.html" class="btn btn-primary btn-sm">Book<span class="hide-xs"> a Pickup</span></a>
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span></button>
+            </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Page Hero -->
-    <div id="book-launch">
-        <h1>About Kerrier Laundry Co. — Family Owned & Based in Franklin, KY</h1>
-        <p>Family owned, community driven.</p>
-        <p>Get to know the family behind the service!</p>
-    </div>
+    <main id="main">
 
-    <!-- About Us Section -->
-    <div class="service-area" id="about">
-        <h2>About Us</h2>
+        <section class="page-hero">
+            <div class="wrap">
+                <span class="eyebrow reveal">About Us · Family owned, community driven</span>
+                <h1 class="reveal" style="--d:.08s">About Kerrier Laundry Co. — family owned &amp; <em>based in Franklin, KY.</em></h1>
+                <p class="lede reveal" style="--d:.16s">Get to know the family behind the service!</p>
+            </div>
+        </section>
 
-        <div class="about-photo">
-            <img 
-                src="https://res.cloudinary.com/dmwtfsqz5/image/upload/v1779730014/Family_Photo_horizontal_vratqf.jpg" 
-                alt="Kelly and Maranda, owners of Kerrier Laundry Co. in Franklin, KY" 
-                class="family-photo">
-        </div>
+        <section class="section" style="padding-top:0">
+            <div class="wrap about-photo-wrap">
+                <figure class="about-photo reveal">
+                    <picture>
+                        <source type="image/webp" srcset="images/family-800.webp 800w, images/family-1600.webp 1600w" sizes="(max-width: 1220px) calc(100vw - 40px), 1180px">
+                        <img src="images/family-1600.jpg" srcset="images/family-800.jpg 800w, images/family-1600.jpg 1600w" sizes="(max-width: 1220px) calc(100vw - 40px), 1180px" width="1600" height="1048" alt="Kelly and Maranda, owners of Kerrier Laundry Co. in Franklin, KY" fetchpriority="high" decoding="async">
+                    </picture>
+                    <figcaption>The family behind Kerrier · Franklin, KY</figcaption>
+                </figure>
+            </div>
+        </section>
 
-        <div class="about-block">
-            <h3>Who We Are</h3>
-            <p>We are proud to be based right here in <strong>Franklin, KY</strong>, serving families in Franklin, KY and communities within 15 miles.</p>
-            <p>Our names are <strong>Kelly Kerr</strong> and <strong>Maranda Cox</strong> (soon to be Kerr). We have three children, two dogs (indoor), one cat (outdoor), two bunnies (escapes often outside), and one turtle. We know a thing or two about laundry with ALL these kids and such.</p>
-        </div>
+        <section class="section section--tight">
+            <div class="wrap">
+                <div class="story reveal">
+                    <div>
+                        <span class="eyebrow">Who we are</span>
+                        <h2>Who <em>we are</em></h2>
+                    </div>
+                    <div class="story-body">
+                        <p>We are proud to be based right here in <strong>Franklin, KY</strong>, serving families in Franklin, KY and communities within 15 miles.</p>
+                        <p>Our names are <strong>Kelly Kerr</strong> and <strong>Maranda Cox</strong> (soon to be Kerr). We have three children, two dogs (indoor), one cat (outdoor), two bunnies (escapes often outside), and one turtle. We know a thing or two about laundry with ALL these kids and such.</p>
+                        <ul class="household">
+                            <li><strong>3</strong>Children</li>
+                            <li><strong>2</strong>Dogs</li>
+                            <li><strong>1</strong>Cat</li>
+                            <li><strong>2</strong>Bunnies</li>
+                            <li><strong>1</strong>Turtle</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="about-block">
-            <h3>Why We Started Kerrier Laundry Co.</h3>
-            <p>We started this business because we feel that we cannot be the only ones trying to get their time back from all the laundry that has to be done between everyone in the house. Whether you have a busy schedule and have no time for laundry or you just want more time with your own family, we want to help you! We know that between washing, drying, and folding it can take up to <strong>6-8 hours</strong> per week from yourselves and your family. We want to give that time back to you.</p>
-        </div>
+                <div class="story reveal">
+                    <div>
+                        <span class="eyebrow">Our why</span>
+                        <h2>Why we started <em>Kerrier Laundry Co.</em></h2>
+                        <p class="big-stat">6–8 hrs<span>of laundry a week we give back</span></p>
+                    </div>
+                    <div class="story-body">
+                        <p>We started this business because we feel that we cannot be the only ones trying to get their time back from all the laundry that has to be done between everyone in the house. Whether you have a busy schedule and have no time for laundry or you just want more time with your own family, we want to help you!</p>
+                        <p>We know that between washing, drying, and folding it can take up to <strong>6-8 hours</strong> per week from yourselves and your family. We want to give that time back to you.</p>
+                    </div>
+                </div>
 
-        <div class="about-block">
-            <h3>Our Promise To You</h3>
-            <p>Every bag is treated like our own. We want to make sure everything looks good, smells good, and can easily be put away. We strive for convenience as well as a 24–48 hour turnaround time. We always try to put people first — if you don't see a time or option that works for you, reach out to us so we can work something out!</p>
-        </div>
+                <div class="story reveal">
+                    <div>
+                        <span class="eyebrow">Our promise</span>
+                        <h2>Our promise <em>to you</em></h2>
+                    </div>
+                    <blockquote class="promise">
+                        <p>Every bag is treated like our own. We want to make sure everything looks good, smells good, and can easily be put away.</p>
+                        <p>We strive for convenience as well as a 24–48 hour turnaround time. We always try to put people first — if you don't see a time or option that works for you, reach out to us so we can work something out!</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
 
-        <div class="about-cta">
-            <p>Ready to let us take laundry off your plate?</p>
-            <a href="scheduling_page.html"><button>Book Now</button></a>
-        </div>
+        <section class="closing">
+            <div class="wrap reveal">
+                <span class="eyebrow eyebrow--center">From our family to yours</span>
+                <h2>Ready to let us take laundry <em>off your plate?</em></h2>
+                <p>Book a pickup online, or call or text us and we will take it from there.</p>
+                <div class="ctas">
+                    <a href="scheduling_page.html" class="btn btn-light">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                    <a href="tel:+12707762464" class="btn btn-outline-light">Call or text (270) 776-2464</a>
+                </div>
+            </div>
+        </section>
 
-    </div>
+    </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <p class="footer-name">Kerrier Laundry Co.</p>
-            <p class="footer-tagline">We pick it up. We bring it back clean.</p>
-        </div>
-        <div class="footer-contact">
-            <p>Call or Text</p>
-            <a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a>
-        </div>
-        <div class="footer-socials">
-            <p>Follow Us</p>
-            <a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" class="social-link">Facebook</a>
-            <a href="https://www.instagram.com/kerrierlaundry/" target="_blank" class="social-link">Instagram</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-name">Kerrier<span>Laundry Co</span></p>
+                    <p class="footer-tagline">We pick it up. We bring it back clean.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="scheduling_page.html">Book Now</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Call or Text</h4>
+                    <ul>
+                        <li><a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a></li>
+                        <li>Franklin, KY</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/kerrierlaundry/" target="_blank" rel="noopener">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+                <p>Family-owned in Franklin, KY</p>
+            </div>
         </div>
     </footer>
 
-    <a href="https://m.me/61589653617028" target="_blank" class="fb-chat-btn" title="Chat with us on Facebook">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26">
+    <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="fb-chat-btn" aria-label="Chat with us on Facebook Messenger" title="Chat with us on Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.836 1.395 5.365 3.578 7.02V21l2.796-1.538A10.6 10.6 0 0 0 12 19.486c5.523 0 10-4.144 10-9.243S17.523 2 12 2zm1.008 12.44-2.55-2.72-4.976 2.72 5.476-5.816 2.612 2.72 4.914-2.72-5.476 5.816z"/>
         </svg>
     </a>
@@ -159,64 +231,7 @@
     }
     </script>
 
-    <style>
-        .about-block {
-            margin-bottom: 36px;
-        }
-
-        .about-block h3 {
-            font-size: 1.2rem;
-            color: var(--primary-navy);
-            margin-bottom: 12px;
-        }
-
-        .about-block p {
-            color: var(--text-dark);
-            font-size: 0.97rem;
-            line-height: 1.75;
-            margin-bottom: 10px;
-        }
-
-        .about-cta {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--white);
-            border: 1px solid var(--soft-border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-top: 20px;
-        }
-
-        .about-cta p {
-            font-size: 1.2rem;
-            color: var(--primary-navy);
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .about-cta button {
-            background-color: var(--primary-navy);
-            color: var(--primary-cream);
-            border: none;
-            padding: 14px 36px;
-            font-size: 1rem;
-            font-family: Georgia, serif;
-            border-radius: var(--radius);
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            transition: var(--transition);
-        }
-
-        .about-cta button:hover {
-            background-color: var(--accent-navy);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-    </style>
-
-    <script>
-        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
-    </script>
+    <script src="site.js?v=5" defer></script>
 
 </body>
 </html>

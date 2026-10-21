@@ -25,7 +25,13 @@
     <meta name="description" content="Kerrier Laundry Co offers residential laundry pickup, wash, fold and delivery in Franklin KY and surrounding areas. We also serve Airbnb and short term rental hosts with commercial linen services.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.kerrierlaundryco.com/services.html">
-    <link rel="stylesheet" href="business.styles.css?v=4">
+    <meta name="theme-color" content="#FCF9F4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
+    <link rel="stylesheet" href="business.styles.css?v=5">
+    <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
@@ -34,161 +40,206 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="site-header">
-        <img 
-            src="https://res.cloudinary.com/dmwtfsqz5/image/upload/Kerrier_Title_Card_texdzt.png" 
-            alt="Kerrier Laundry Co."
-            class="header-logo">
-    </div>
-    <nav>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="scheduling_page.html">Book Now</a>
-            <a href="about.html">About Us</a>
-            <a href="faq.html">FAQ</a>
-        </div>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-
-        <!-- Hero -->
-        <div class="services-hero">
-            <h1>Our Services</h1>
-            <p>Pickup, wash, fold, and delivery — we handle it all so you don't have to.</p>
-        </div>
-
-        <!-- Residential Section -->
-        <div class="services-section">
-            <div class="services-section-header">
-                <h2>Residential Services</h2>
-                <p>For individuals and families in Franklin, KY and the surrounding area.</p>
-            </div>
-
-            <div class="services-grid">
-
-                <div class="service-card">
-                    <div class="service-icon">🧺</div>
-                    <h3>Pickup & Delivery</h3>
-                    <p>We come to you. Schedule a pickup time and we'll grab your laundry right from your door — porch drop or hand-off, whatever works best for you.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">👕</div>
-                    <h3>Wash & Fold</h3>
-                    <p>Every load is washed with care using quality detergents like Gain, Tide, and Arm & Hammer. Colors and whites are sorted appropriately and everything comes back neatly folded.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <h3>24–48 Hour Turnaround</h3>
-                    <p>We deliver your clean laundry within 24–48 hours of pickup. Need a specific drop-off time? Just let us know and we'll work around your schedule.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🪝</div>
-                    <h3>Hang & Return</h3>
-                    <p>Need items hung instead of folded? We've got you covered. Just request it when booking — hangers are provided at a small additional fee.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Same-Day Service</h3>
-                    <p>In a pinch? We offer same-day delivery for those moments when you just can't wait. An additional fee applies — contact us to check availability.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <h3>Recurring Service</h3>
-                    <p>Set up a regular schedule and save 10% on every order — or 20% off your first order when you sign up for recurring service. Perfect for busy households who want clean laundry without ever thinking about it.</p>
-                </div>
-
-            </div>
-
-            <!-- Residential pricing note -->
-            <div class="services-pricing-note">
-                <p>Residential pricing: <strong>$20 first bag</strong>, <strong>$15 each additional bag</strong>, plus <strong>$5 pickup &amp; delivery</strong> within 15 miles ($0.89/mile beyond 15). Use our <a href="index.html#service-area">map</a> to check your address.</p>
-                <a href="scheduling_page.html"><button>Book a Residential Pickup</button></a>
+    <header class="site-header" id="site-header">
+        <div class="wrap header-inner">
+            <a href="index.html" class="brand" aria-label="Kerrier Laundry Co. — Home">
+                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42">
+            </a>
+            <nav class="main-nav" id="main-nav" aria-label="Main">
+                <ul>
+                    <li><a href="services.html" aria-current="page">Services</a></li>
+                    <li><a href="index.html#how">How it works</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:+12707762464" class="header-phone">(270) 776-2464</a>
+                <a href="scheduling_page.html" class="btn btn-primary btn-sm">Book<span class="hide-xs"> a Pickup</span></a>
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span></button>
             </div>
         </div>
+    </header>
 
-        <!-- Divider -->
-        <div class="services-divider"></div>
+    <main id="main">
 
-        <!-- Commercial Section -->
-        <div class="services-section">
-            <div class="services-section-header">
-                <h2>Commercial Services</h2>
-                <p>Reliable linen care for Airbnb hosts and short-term rental properties.</p>
-            </div>
-
-            <div class="services-grid services-grid--commercial">
-
-                <div class="service-card">
-                    <div class="service-icon">🏠</div>
-                    <h3>Airbnb & Short-Term Rental Linens</h3>
-                    <p>Keep your property guest-ready without the hassle. We pick up, wash, fold, and return your sheets, pillowcases, and towels so your turnover is smooth and stress-free.</p>
+        <section class="page-hero">
+            <div class="wrap">
+                <span class="eyebrow reveal">Services · Franklin, KY</span>
+                <h1 class="reveal" style="--d:.08s">Our Services: pickup, wash, fold &amp; <em>delivery.</em></h1>
+                <p class="lede reveal" style="--d:.16s">Pickup, wash, fold, and delivery — we handle it all so you don't have to.</p>
+                <div class="page-hero-ctas reveal" style="--d:.24s">
+                    <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                    <a href="#commercial" class="btn btn-ghost">Commercial &amp; Airbnb</a>
                 </div>
+            </div>
+        </section>
 
-                <div class="service-card">
-                    <div class="service-icon">🛏️</div>
-                    <h3>Full Linen Turnover</h3>
-                    <p>Sheets, duvet covers, pillowcases, bath towels, hand towels — we handle every piece. Everything comes back fresh, clean, and ready to be made up for your next guest.</p>
+        <section class="section" id="residential" aria-labelledby="res-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <span class="eyebrow eyebrow--center">Residential</span>
+                    <h2 id="res-title">Residential <em>services</em></h2>
+                    <p>For individuals and families in Franklin, KY and the surrounding area.</p>
                 </div>
+                <ul class="svc-grid">
+                    <li class="svc-card reveal">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+                        <div><h3>Pickup &amp; Delivery</h3>
+                        <p>We come to you. Schedule a pickup time and we'll grab your laundry right from your door — porch drop or hand-off, whatever works best for you.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.08s">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4.5"/><path d="M7 6.5h.01M10 6.5h.01"/></svg></span>
+                        <div><h3>Wash &amp; Fold</h3>
+                        <p>Every load is washed with care using quality detergents like Gain, Tide, and Arm &amp; Hammer. Colors and whites are sorted appropriately and everything comes back neatly folded.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.16s">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                        <div><h3>24–48 Hour Turnaround</h3>
+                        <p>We deliver your clean laundry within 24–48 hours of pickup. Need a specific drop-off time? Just let us know and we'll work around your schedule.</p></div>
+                    </li>
+                    <li class="svc-card reveal svc-card--feature"><span class="svc-tag">Save 10–20%</span>
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg></span>
+                        <div><h3>Recurring Service</h3>
+                        <p>Set up a regular schedule and save 10% on every order — or 20% off your first order when you sign up for recurring service. Perfect for busy households who want clean laundry without ever thinking about it.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.08s"><span class="svc-tag">Add-on</span>
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5a2 2 0 1 1 2-2"/><path d="M12 7.5v1.5L3.5 15a1.2 1.2 0 0 0 .7 2.2h15.6a1.2 1.2 0 0 0 .7-2.2L12 9"/></svg></span>
+                        <div><h3>Hang &amp; Return</h3>
+                        <p>Need items hung instead of folded? We've got you covered. Just request it when booking — hangers are provided at a small additional fee.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.16s"><span class="svc-tag">Add-on</span>
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+                        <div><h3>Same-Day Service</h3>
+                        <p>In a pinch? We offer same-day delivery for those moments when you just can't wait. An additional fee applies — contact us to check availability.</p></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-                <div class="service-card">
-                    <div class="service-icon">📦</div>
-                    <h3>Flexible Load Sizing</h3>
-                    <p>Commercial loads vary widely, so our pricing is tailored to your needs. We price commercial work on a per-pound basis based on your total load — reach out for a custom quote.</p>
+        <section class="pricing" id="pricing" aria-labelledby="price-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <span class="eyebrow eyebrow--center">Pricing</span>
+                    <h2 id="price-title">Simple, <em>transparent</em> pricing</h2>
+                    <p>No hidden fees. No surprises. Just clean laundry.</p>
                 </div>
-
+                <div class="pricing-grid reveal">
+                    <div class="price-main">
+                        <h3>Residential wash &amp; fold</h3>
+                        <ul class="price-list">
+                            <li><span class="item">First bag<small>About 15 lb, a standard kitchen-size bag</small></span><span class="dots" aria-hidden="true"></span><span class="amt">$20</span></li>
+                            <li><span class="item">Each additional bag</span><span class="dots" aria-hidden="true"></span><span class="amt">$15</span></li>
+                            <li><span class="item">Pickup &amp; delivery<small>Flat fee per order</small></span><span class="dots" aria-hidden="true"></span><span class="amt">$5</span></li>
+                        </ul>
+                        <p class="price-min"><span class="pill">$25</span> Minimum order: your first bag plus pickup &amp; delivery.</p>
+                        <p class="price-fine">Pickup &amp; delivery covers homes within 15 driving miles of Franklin, KY. Beyond 15 miles, add $0.89 per mile. <a href="index.html#service-area">Check your address</a>.</p>
+                        <a href="scheduling_page.html" class="btn btn-primary">Book a Residential Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                    </div>
+                    <div class="price-save">
+                        <h3>Ways to save</h3>
+                        <ul class="save-list">
+                            <li><span class="pct">10<sup>%</sup></span><span><strong>Off your first order</strong>Welcome to Kerrier.</span></li>
+                            <li><span class="pct">10<sup>%</sup></span><span><strong>Off every recurring order</strong>Set a regular schedule and save each time.</span></li>
+                            <li class="featured"><span class="pct">20<sup>%</sup></span><span><strong>Off a first order that starts recurring</strong>For example, $25 becomes $20.00.</span></li>
+                        </ul>
+                        <p class="save-note">Discounts apply to your full order total, including pickup &amp; delivery.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Commercial CTA -->
-            <div class="services-pricing-note">
-                <p>Commercial pricing is customized based on your property's load size and needs. <strong>Contact us for a free quote.</strong></p>
-                <a href="https://m.me/61589653617028" target="_blank"><button>Get a Commercial Quote</button></a>
+        <section class="section" id="commercial" aria-labelledby="com-title">
+            <div class="wrap split">
+                <div class="split-copy reveal">
+                    <span class="eyebrow">Commercial</span>
+                    <h2 id="com-title">Commercial <em>services</em></h2>
+                    <p>Reliable linen care for Airbnb hosts and short-term rental properties.</p>
+                    <div class="quote-note">Commercial pricing is customized based on your property's load size and needs. <strong>Contact us for a free quote.</strong></div>
+                    <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="btn btn-primary">Get a Commercial Quote <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                </div>
+                <ul class="stack-cards">
+                    <li class="svc-card reveal">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span>
+                        <div><h3>Airbnb &amp; Short-Term Rental Linens</h3>
+                        <p>Keep your property guest-ready without the hassle. We pick up, wash, fold, and return your sheets, pillowcases, and towels so your turnover is smooth and stress-free.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.08s">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-8v5"/><circle cx="6.5" cy="11" r="1.6"/></svg></span>
+                        <div><h3>Full Linen Turnover</h3>
+                        <p>Sheets, duvet covers, pillowcases, bath towels, hand towels — we handle every piece. Everything comes back fresh, clean, and ready to be made up for your next guest.</p></div>
+                    </li>
+                    <li class="svc-card reveal" style="--d:0.16s">
+                        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span>
+                        <div><h3>Flexible Load Sizing</h3>
+                        <p>Commercial loads vary widely, so our pricing is tailored to your needs. We price commercial work on a per-pound basis based on your total load — reach out for a custom quote.</p></div>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </section>
 
-        <!-- Bottom CTA -->
-        <div class="services-bottom-cta">
-            <h2>Not sure which service is right for you?</h2>
-            <p>Reach out and we'll figure it out together.</p>
-            <div class="services-bottom-cta-btns">
-                <a href="scheduling_page.html"><button class="btn-primary">Book Now</button></a>
-                <a href="https://m.me/61589653617028" target="_blank"><button class="btn-secondary">Message Us</button></a>
+        <section class="closing">
+            <div class="wrap reveal">
+                <span class="eyebrow eyebrow--center">We’re here to help</span>
+                <h2>Not sure which service is <em>right for you?</em></h2>
+                <p>Reach out and we'll figure it out together.</p>
+                <div class="ctas">
+                    <a href="scheduling_page.html" class="btn btn-light">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                    <a href="https://m.me/61589653617028" class="btn btn-outline-light" target="_blank" rel="noopener">Message Us</a>
+                </div>
             </div>
-        </div>
+        </section>
+
+    </main>
 
     <footer class="site-footer">
-        <div class="footer-brand">
-            <p class="footer-name">Kerrier Laundry Co.</p>
-            <p class="footer-tagline">We pick it up. We bring it back clean.</p>
-        </div>
-        <div class="footer-contact">
-            <p>Call or Text</p>
-            <a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a>
-        </div>
-        <div class="footer-socials">
-            <p>Follow Us</p>
-            <a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" class="social-link">Facebook</a>
-            <a href="https://www.instagram.com/kerrierlaundry/" target="_blank" class="social-link">Instagram</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-name">Kerrier<span>Laundry Co</span></p>
+                    <p class="footer-tagline">We pick it up. We bring it back clean.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="scheduling_page.html">Book Now</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Call or Text</h4>
+                    <ul>
+                        <li><a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a></li>
+                        <li>Franklin, KY</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/kerrierlaundry/" target="_blank" rel="noopener">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span class="footer-year">2026</span> Kerrier Laundry Co. All rights reserved.</p>
+                <p>Family-owned in Franklin, KY</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Facebook Chat Button -->
-    <a href="https://m.me/61589653617028" target="_blank" class="fb-chat-btn" title="Chat with us on Facebook">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26">
+    <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="fb-chat-btn" aria-label="Chat with us on Facebook Messenger" title="Chat with us on Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.836 1.395 5.365 3.578 7.02V21l2.796-1.538A10.6 10.6 0 0 0 12 19.486c5.523 0 10-4.144 10-9.243S17.523 2 12 2zm1.008 12.44-2.55-2.72-4.976 2.72 5.476-5.816 2.612 2.72 4.914-2.72-5.476 5.816z"/>
         </svg>
     </a>
 
-    <script>
-        document.querySelectorAll(".footer-year").forEach(el => { el.textContent = new Date().getFullYear(); });
-    </script>
+    <script src="site.js?v=5" defer></script>
 
 </body>
 </html>
