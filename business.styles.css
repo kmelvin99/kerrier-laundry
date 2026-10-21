@@ -606,7 +606,7 @@ p { text-wrap: pretty; }
 /* Booking */
 .book-hero { padding-bottom: clamp(32px, 4vw, 48px); }
 .book-grid { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
-.book-summary { position: sticky; top: calc(var(--nav-h) + 20px); background: var(--linen) !important; padding: 32px 28px; }
+.book-summary { position: sticky; top: calc(var(--nav-h) + 20px); padding: 32px 28px; }
 .book-summary h2 { font-size: 2rem; margin: 10px 0 16px; }
 .book-summary .price-list li { padding: 14px 0; }
 .book-summary .price-list .amt { font-size: 2rem; }
@@ -806,6 +806,116 @@ p { text-wrap: pretty; }
 }
 @media (max-width: 420px) { .hide-xs { display: none; } }
 @media (max-width: 833px) { .book-grid { display: flex; flex-direction: column; } .book-grid > * { width: 100%; } }
+
+
+/* ==========================================================
+   v7 — Navy rhythm: deep-navy bands alternate with cream
+   ========================================================== */
+.section--navy, .section--ink, .page-hero--navy, .card--navy, .card--ink {
+    --hairline: rgba(252, 249, 244, .14);
+    --muted: rgba(252, 249, 244, .78);
+    --ink: #FCF9F4;
+}
+.section--navy {
+    background:
+        radial-gradient(900px 420px at 85% 0%, rgba(42, 75, 106, .55), transparent 70%),
+        var(--navy);
+    color: var(--cream);
+}
+.section--ink { background: var(--navy-ink); color: var(--cream); }
+.section--navy h2, .section--navy h3, .section--ink h2, .section--ink h3 { color: var(--cream); }
+.section--navy h2 em, .section--navy h3 em, .section--ink h2 em { color: var(--champagne); }
+.section--navy .eyebrow, .section--ink .eyebrow { color: var(--champagne); }
+.section--navy p, .section--ink p { color: var(--on-navy); }
+.section--navy strong { color: var(--cream); }
+
+/* Frosted glass cards on navy */
+.section--navy .card, .section--navy .card--navy {
+    background: rgba(252, 249, 244, .07) !important;
+    border: 1px solid rgba(252, 249, 244, .12);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    color: var(--cream);
+}
+.section--navy .card .big { color: var(--cream); }
+.section--navy .card-icon { color: var(--champagne); }
+.section--navy .card-kicker { color: var(--champagne); }
+.section--navy .link-chevron { color: var(--champagne); }
+
+/* Home hero: photo straddles cream and the deep-navy band below */
+.hero { isolation: isolate; }
+.hero-media-wrap { position: relative; padding-bottom: clamp(40px, 5vw, 64px); }
+.hero-media-wrap::before {
+    content: ""; position: absolute; z-index: -1; left: 50%; width: 100vw; transform: translateX(-50%);
+    top: 52%; bottom: 0; background: var(--navy-ink);
+}
+.facts.section--ink { padding-top: 8px; }
+.facts.section--ink ul { border-top-color: rgba(252, 249, 244, .14); }
+.facts.section--ink li { color: var(--on-navy); }
+.facts.section--ink strong { color: var(--cream); }
+.facts.section--ink svg { color: var(--champagne); }
+
+/* Reviews on navy */
+.reviews.section--navy .review { background: rgba(252, 249, 244, .07); border: 1px solid rgba(252, 249, 244, .12); }
+.reviews.section--navy .review blockquote { color: var(--cream); }
+.reviews.section--navy .review figcaption { color: var(--on-navy); }
+.reviews.section--navy .review .avatar { background: var(--cream); color: var(--navy); }
+.reviews.section--navy .review .stars { color: var(--champagne); }
+.reviews.section--navy .review-btn { background: rgba(252, 249, 244, .12); color: var(--cream); }
+.reviews.section--navy .review-btn:hover { background: var(--cream); color: var(--navy); }
+
+/* Pricing on navy (services): cream price card stays solid for legibility */
+.pricing.section--navy .price-main { background: var(--cream) !important; border: 0; color: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.pricing.section--navy .price-main { --hairline: rgba(22, 53, 81, .12); --muted: #56606B; --ink: #1C2733; }
+.pricing.section--navy .price-main p { color: var(--muted); }
+.pricing.section--navy .price-main .price-min { color: var(--ink); }
+.pricing.section--navy .price-main .price-fine a { color: var(--navy); }
+.pricing.section--navy .price-save .featured { background: rgba(216, 195, 160, .10); }
+
+/* Navy page-opening bands (services, FAQ, about, booking) */
+.page-hero--navy {
+    background:
+        radial-gradient(1000px 460px at 50% -20%, rgba(42, 75, 106, .9), transparent 70%),
+        radial-gradient(600px 300px at 100% 100%, rgba(216, 195, 160, .10), transparent 70%),
+        var(--navy-ink);
+    color: var(--cream);
+}
+.page-hero--navy h1 { color: var(--cream); }
+.page-hero--navy h1 em { color: var(--champagne); }
+.page-hero--navy .eyebrow { color: var(--champagne); }
+.page-hero--navy .lede { color: var(--on-navy); }
+.straddle { background: linear-gradient(180deg, var(--navy-ink) 0 50%, var(--cream) 50% 100%); }
+.straddle + .section { padding-top: clamp(80px, 10vw, 128px); }
+.page-hero--navy + .straddle { margin-top: -1px; }
+.section--after-band { padding-top: clamp(56px, 7vw, 88px); }
+
+/* About: stat card as glass on the navy "Our why" band */
+.section--navy .stat-card span:not(.big) { color: var(--on-navy); }
+.section--navy .story-body p { color: var(--on-navy); }
+.section--navy .story-body strong { color: var(--cream); }
+
+/* FAQ help card on navy */
+.help-card.card--navy h2 { color: var(--cream); }
+.help-card.card--navy p { color: var(--on-navy); }
+.help-card.card--navy .eyebrow { color: var(--champagne); }
+
+/* Booking summary in navy */
+.book-summary.card--navy .eyebrow { color: var(--champagne); }
+.book-summary.card--navy h2 { color: var(--cream); }
+.book-summary.card--navy h2 em { color: var(--champagne); }
+.book-summary.card--navy .price-list .item { color: var(--cream); }
+.book-summary.card--navy .price-list .item small { color: var(--on-navy); }
+.book-summary.card--navy .price-list .amt { color: var(--cream); }
+.book-summary.card--navy .book-facts { color: var(--cream); }
+.book-summary.card--navy .book-facts svg { color: var(--champagne); }
+.book-summary.card--navy .book-facts strong { color: var(--cream); }
+.book-summary.card--navy .book-save { background: rgba(252, 249, 244, .08); border: 1px solid rgba(252, 249, 244, .12); }
+.book-summary.card--navy .book-questions { color: var(--on-navy) !important; }
+.book-summary.card--navy .book-questions a { color: var(--champagne); border-bottom-color: rgba(216, 195, 160, .5); }
+
+@media (max-width: 600px) {
+    .hero-media-wrap::before { display: none; }
+    .straddle { background: linear-gradient(180deg, var(--navy-ink) 0 40%, var(--cream) 40% 100%); }
+}
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
