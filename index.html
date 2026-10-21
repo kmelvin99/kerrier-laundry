@@ -31,11 +31,13 @@
     <meta property="og:url" content="https://www.kerrierlaundryco.com/">
     <meta property="og:image" content="https://res.cloudinary.com/dmwtfsqz5/image/upload/w_1200,q_auto,f_jpg/Kerrier_Title_Card_texdzt.png">
     <link rel="canonical" href="https://www.kerrierlaundryco.com/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
-    <link rel="stylesheet" href="business.styles.css?v=5">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
+    <link rel="stylesheet" href="business.styles.css?v=6">
     <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -48,9 +50,9 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" id="site-header">
-        <div class="wrap header-inner">
+        <div class="wrap-wide header-inner">
             <a href="index.html" class="brand" aria-label="Kerrier Laundry Co. — Home">
-                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42">
+                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42" fetchpriority="high">
             </a>
             <nav class="main-nav" id="main-nav" aria-label="Main">
                 <ul>
@@ -60,6 +62,10 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="faq.html">FAQ</a></li>
                 </ul>
+                <div class="nav-sheet-foot">
+                    <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup</a>
+                    <a href="tel:+12707762464" class="btn btn-ghost">Call or text (270) 776-2464</a>
+                </div>
             </nav>
             <div class="header-actions">
                 <a href="tel:+12707762464" class="header-phone">(270) 776-2464</a>
@@ -72,35 +78,28 @@
     <main id="main">
 
         <!-- Hero -->
-        <section class="hero">
-            <div class="wrap hero-grid">
-                <div class="hero-copy">
-                    <span class="eyebrow reveal">Family-owned · Franklin, KY</span>
-                    <h1 class="reveal" style="--d:.08s">Laundry pickup &amp; delivery, <em>beautifully handled.</em></h1>
-                    <p class="lede reveal" style="--d:.16s">We collect your laundry from your door, wash it with care, fold it neatly, and bring it back within 24–48 hours. Get back the hours laundry takes every week.</p>
-                    <div class="hero-ctas reveal" style="--d:.24s">
-                        <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-                        <a href="#service-area" class="btn btn-ghost" id="hero-check">Check your address</a>
-                    </div>
-                    <ul class="hero-proof reveal" style="--d:.32s">
-                        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8.2"/><path d="M6.4 10.2l2.4 2.4 4.8-5"/></svg><span><strong>From $25</strong> with pickup &amp; delivery</span></li>
-                        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8.2"/><path d="M6.4 10.2l2.4 2.4 4.8-5"/></svg><span><strong>24–48 hour</strong> turnaround</span></li>
-                        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8.2"/><path d="M6.4 10.2l2.4 2.4 4.8-5"/></svg><span>Within <strong>15 miles</strong> of Franklin</span></li>
-                    </ul>
+        <section class="hero" data-bar-after>
+            <div class="wrap hero-copy">
+                <span class="eyebrow intro">Family-owned · Franklin, KY</span>
+                <h1 class="intro" style="--d:.06s">Laundry pickup &amp; delivery, <em>beautifully handled.</em></h1>
+                <p class="lede intro" style="--d:.12s">We collect it from your door, wash it with care, fold it neatly and bring it back within 24–48 hours.</p>
+                <div class="cta-row intro" style="--d:.18s">
+                    <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup</a>
+                    <a href="#service-area" class="link-chevron" id="hero-check">Check your address <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5l4.5 4.5L6 12.5"/></svg></a>
                 </div>
-
-                <div class="hero-visual reveal" style="--d:.2s">
-                    <div class="hero-card hero-photo">
-                        <picture>
-                            <source type="image/webp" srcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" sizes="(max-width: 960px) min(520px, 100vw), 46vw">
-                            <img src="images/delivery-cargo-1600.jpg" srcset="images/delivery-cargo-800.jpg 800w, images/delivery-cargo-1600.jpg 1600w" sizes="(max-width: 960px) min(520px, 100vw), 46vw" width="1600" height="1360" alt="Two bags of freshly folded laundry loaded in our delivery SUV, ready to go out" fetchpriority="high" decoding="async">
-                        </picture>
-                    </div>
-                    <div class="float-chip chip-top">
-                        <span class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-                        <span><strong>Back in 24–48 hours</strong>Washed, dried &amp; folded</span>
-                    </div>
-                    <figure class="float-chip chip-bottom">
+            </div>
+            <div class="wrap-wide hero-media-wrap">
+                <div class="hero-media">
+                    <picture>
+                        <source type="image/webp" srcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" sizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))">
+                        <img src="images/delivery-cargo-1600.jpg" srcset="images/delivery-cargo-800.jpg 800w, images/delivery-cargo-1600.jpg 1600w" sizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" width="1600" height="1360" alt="Two bags of freshly folded laundry loaded in our delivery SUV, ready to go out" fetchpriority="high" decoding="async">
+                    </picture>
+                    <ul class="hero-glass glass-navy">
+                        <li><strong>From $25</strong>with pickup &amp; delivery</li>
+                        <li><strong>24–48 hrs</strong>back at your door</li>
+                        <li><strong>15 miles</strong>around Franklin, KY</li>
+                    </ul>
+                    <figure class="hero-quote glass-cream">
                         <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                         <q>The folding alone is worth it!</q>
                         <figcaption class="who">Caleb Dorris</figcaption>
@@ -109,42 +108,42 @@
             </div>
         </section>
 
-        <!-- Trust strip -->
-        <section class="trust" aria-label="Why Kerrier">
+        <!-- Facts -->
+        <section class="facts" aria-label="Why Kerrier">
             <div class="wrap">
-                <ul>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M12 17.5s-3.2-1.9-3.2-4.1a1.8 1.8 0 0 1 3.2-1.1 1.8 1.8 0 0 1 3.2 1.1c0 2.2-3.2 4.1-3.2 4.1z"/></svg><span><strong>Family-owned</strong>Local to Franklin, KY</span></li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>24–48 hour turnaround</strong>From pickup to your door</span></li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><strong>Pickup &amp; delivery</strong>Porch drop or hand-off</span></li>
-                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span><strong>Five-star reviews</strong>From our Franklin neighbors</span></li>
+                <ul class="reveal">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M12 17.5s-3.2-1.9-3.2-4.1a1.8 1.8 0 0 1 3.2-1.1 1.8 1.8 0 0 1 3.2 1.1c0 2.2-3.2 4.1-3.2 4.1z"/></svg><span><strong>Family-owned</strong>Local to Franklin, KY</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><strong>Pickup &amp; delivery</strong>Porch drop or hand-off</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5s-6 6.6-6 10.9a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5z"/><path d="M9.2 14.6a2.9 2.9 0 0 0 2.8 2.6"/></svg><span><strong>Your detergent, your way</strong>At no extra cost</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span><strong>Five-star reviews</strong>From our Franklin neighbors</span></li>
                 </ul>
             </div>
         </section>
 
         <!-- How it works -->
-        <section class="how" id="how">
+        <section class="section how" id="how" aria-labelledby="how-title">
             <div class="wrap">
                 <div class="section-head reveal">
-                    <span class="eyebrow eyebrow--center">How it works</span>
-                    <h2>Three steps to <em>a lighter week</em></h2>
+                    <span class="eyebrow">How it works</span>
+                    <h2 id="how-title">Three steps to <em>a lighter week.</em></h2>
                     <p>No laundromat trips. No folding on the couch. Just fresh laundry, back at your door.</p>
                 </div>
-                <ol class="steps">
-                    <li class="step reveal">
+                <ol class="bento bento-3" style="list-style:none">
+                    <li class="card reveal">
                         <span class="step-num" aria-hidden="true">01</span>
-                        <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
                         <h3>Book a pickup</h3>
                         <p>Choose a time online, or call or text us. Bag up your laundry and leave it on the porch or hand it to us at the door.</p>
                     </li>
-                    <li class="step reveal" style="--d:.1s">
+                    <li class="card reveal" style="--d:.08s">
                         <span class="step-num" aria-hidden="true">02</span>
-                        <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4.5"/><path d="M7 6.5h.01M10 6.5h.01"/></svg></span>
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><circle cx="12" cy="13" r="4.5"/><path d="M7 6.5h.01M10 6.5h.01"/></svg>
                         <h3>We wash &amp; fold</h3>
                         <p>Sorted with care and washed in trusted detergents like Gain, Tide and Arm &amp; Hammer, or your own preference at no extra cost. Then neatly folded.</p>
                     </li>
-                    <li class="step reveal" style="--d:.2s">
+                    <li class="card reveal" style="--d:.16s">
                         <span class="step-num" aria-hidden="true">03</span>
-                        <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 15l2 2 3.5-4"/></svg></span>
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 15l2 2 3.5-4"/></svg>
                         <h3>Delivered back</h3>
                         <p>Fresh, folded and ready to put away, back at your door within 24–48 hours of pickup.</p>
                     </li>
@@ -152,43 +151,51 @@
             </div>
         </section>
 
-        <!-- Care you can see (real photos) -->
-        <section class="gallery" aria-labelledby="gallery-title">
-            <div class="wrap">
-                <div class="section-head reveal">
-                    <span class="eyebrow eyebrow--center">Care you can see</span>
-                    <h2 id="gallery-title">Every bag treated <em>like our own</em></h2>
-                    <p>Neatly folded, carefully packed, and left right at your door.</p>
+        <!-- Full-bleed photo moment -->
+        <section class="photo-moment" aria-labelledby="gallery-title">
+            <picture>
+                        <source type="image/webp" srcset="images/folded-stacks-800.webp 800w, images/folded-stacks-1600.webp 1600w" sizes="100vw">
+                        <img src="images/folded-stacks-1600.jpg" srcset="images/folded-stacks-800.jpg 800w, images/folded-stacks-1600.jpg 1600w" sizes="100vw" width="1600" height="1067" alt="Tall stacks of neatly folded shirts and shorts on a wooden table" loading="lazy" decoding="async">
+                    </picture>
+            <div class="photo-moment-copy reveal">
+                <span class="eyebrow">Care you can see</span>
+                <h2 id="gallery-title">Every bag treated <em>like our own.</em></h2>
+                <p>Neatly folded, carefully packed, and left right at your door.</p>
+            </div>
+        </section>
+
+        <!-- Delivered bento -->
+        <section class="section" aria-label="Delivered to your door">
+            <div class="wrap photo-bento">
+                <figure class="photo-card reveal">
+                    <picture>
+                        <source type="image/webp" srcset="images/delivered-door-640.webp 640w, images/delivered-door-1120.webp 1120w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 833px) calc(100vw - 48px), 540px">
+                        <img src="images/delivered-door-1120.jpg" srcset="images/delivered-door-640.jpg 640w, images/delivered-door-1120.jpg 1120w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 833px) calc(100vw - 48px), 540px" width="1120" height="1400" alt="Bags of clean, folded laundry delivered to a front door" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption class="glass-label glass-cream">Delivered to your door</figcaption>
+                </figure>
+                <div class="card card--navy reveal" style="--d:.08s">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                    <span class="big">24–48 hours.</span>
+                    <p>From pickup to fresh, folded laundry back at your door. Need a specific drop-off time? Just let us know.</p>
                 </div>
-                <div class="gallery-grid">
-                    <figure class="photo-card reveal">
-                        <picture>
-                            <source type="image/webp" srcset="images/folded-stacks-800.webp 800w, images/folded-stacks-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
-                            <img src="images/folded-stacks-1600.jpg" srcset="images/folded-stacks-800.jpg 800w, images/folded-stacks-1600.jpg 1600w" sizes="(max-width: 960px) 100vw, 680px" width="1600" height="1067" alt="Tall stacks of neatly folded shirts and shorts on a wooden table" loading="lazy" decoding="async">
-                        </picture>
-                        <figcaption><span class="cap-kicker">Step two</span>Folded with care</figcaption>
-                    </figure>
-                    <figure class="photo-card reveal" style="--d:.12s">
-                        <picture>
-                            <source type="image/webp" srcset="images/delivered-door-640.webp 640w, images/delivered-door-1120.webp 1120w" sizes="(max-width: 960px) 100vw, 480px">
-                            <img src="images/delivered-door-1120.jpg" srcset="images/delivered-door-640.jpg 640w, images/delivered-door-1120.jpg 1120w" sizes="(max-width: 960px) 100vw, 480px" width="1120" height="1400" alt="Bags of clean, folded laundry delivered to a front door" loading="lazy" decoding="async">
-                        </picture>
-                        <figcaption><span class="cap-kicker">Step three</span>Delivered to your door</figcaption>
-                    </figure>
+                <div class="card reveal" style="--d:.16s">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+                    <h3>Porch drop or hand-off.</h3>
+                    <p>Leave your bag on the porch or hand it to us at the door, whatever works best for you.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Pricing -->
-        <section class="pricing" id="pricing">
+        <section class="section pricing" id="pricing" aria-labelledby="price-title">
             <div class="wrap">
                 <div class="section-head reveal">
-                    <span class="eyebrow eyebrow--center">Pricing</span>
-                    <h2>Simple, <em>transparent</em> pricing</h2>
+                    <span class="eyebrow">Pricing</span>
+                    <h2 id="price-title">Simple, <em>transparent</em> pricing.</h2>
                     <p>No hidden fees. No surprises. Just clean laundry.</p>
                 </div>
-                <div class="pricing-grid reveal">
-                    <div class="price-main">
+                <div class="price-bento">
+                    <div class="card price-main reveal">
                         <h3>Wash &amp; fold</h3>
                         <ul class="price-list">
                             <li><span class="item">First bag<small>About 15 lb, a standard kitchen-size bag</small></span><span class="dots" aria-hidden="true"></span><span class="amt">$20</span></li>
@@ -197,9 +204,11 @@
                         </ul>
                         <p class="price-min"><span class="pill">$25</span> Minimum order: your first bag plus pickup &amp; delivery.</p>
                         <p class="price-fine">Pickup &amp; delivery covers homes within 15 driving miles of Franklin, KY. Beyond 15 miles, add $0.89 per mile.</p>
-                        <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                        <div class="cta-row">
+                            <a href="scheduling_page.html" class="btn btn-primary">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></svg></a>
+                        </div>
                     </div>
-                    <div class="price-save">
+                    <div class="card card--navy price-save reveal" style="--d:.08s">
                         <h3>Ways to save</h3>
                         <ul class="save-list">
                             <li><span class="pct">10<sup>%</sup></span><span><strong>Off your first order</strong>Welcome to Kerrier.</span></li>
@@ -208,21 +217,37 @@
                         </ul>
                         <p class="save-note">Discounts apply to your full order total, including pickup &amp; delivery.</p>
                     </div>
+                    <div class="card price-mini reveal">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                        <h3>15 driving miles</h3>
+                        <p>From Franklin, KY, included in the $5 fee. Beyond that, $0.89 per mile.</p>
+                        <a href="#service-area" class="link-chevron">Check your address <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5l4.5 4.5L6 12.5"/></svg></a>
+                    </div>
+                    <div class="card price-mini reveal" style="--d:.08s">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                        <h3>24–48 hours</h3>
+                        <p>From pickup to fresh, folded laundry back at your door.</p>
+                    </div>
+                    <div class="card price-mini reveal" style="--d:.16s">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M16.5 14.5h.01"/></svg>
+                        <h3>Easy to pay</h3>
+                        <p>Cash, Cash App, Zelle and PayPal.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Testimonials -->
-        <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+        <section class="section reviews" id="reviews" aria-labelledby="reviews-title">
             <div class="wrap">
                 <div class="reviews-head reveal">
                     <div>
                         <span class="eyebrow">Kind words</span>
-                        <h2 id="reviews-title">Loved by <em>our neighbors</em></h2>
+                        <h2 id="reviews-title">Loved by <em>our neighbors.</em></h2>
                     </div>
                     <div class="review-controls">
-                        <button class="review-btn" id="t-prev" type="button" aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4"/></svg></button>
-                        <button class="review-btn" id="t-next" type="button" aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+                        <button class="review-btn" id="t-prev" type="button" aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5"/></svg></button>
+                        <button class="review-btn" id="t-next" type="button" aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5l4.5 4.5L6 12.5"/></svg></button>
                     </div>
                 </div>
                 <ul class="review-track reveal" id="testimonials-track" tabindex="0" aria-label="Customer reviews">
@@ -266,14 +291,13 @@
         </section>
 
         <!-- Service Area -->
-        <section class="area" id="service-area">
+        <section class="section area" id="service-area" aria-labelledby="area-title">
             <div class="wrap area-grid">
                 <div class="area-copy reveal">
                     <span class="eyebrow">Service area</span>
-                    <h2>Are we <em>in your neighborhood?</em></h2>
+                    <h2 id="area-title">Are we <em>in your neighborhood?</em></h2>
                     <p>We serve homes within 15 driving miles of Franklin, KY. Enter your address to check in seconds.</p>
-
-                    <div class="calculator-card">
+                    <div class="card calculator-card">
                         <div class="calc-field">
                             <label for="address-input">Your address</label>
                             <div class="calc-row">
@@ -314,21 +338,20 @@
                         <li>Just outside the area? We'll always do our best to work something out.</li>
                     </ul>
                 </div>
-                <div class="map-frame reveal" style="--d:.1s">
+                <div class="map-frame reveal" style="--d:.08s">
                     <div id="zone-map" role="region" aria-label="Map of our 15-mile service area around Franklin, KY"></div>
-                    <span class="map-label">15-mile service area · Franklin, KY</span>
+                    <span class="glass-label glass-cream">15-mile service area · Franklin, KY</span>
                 </div>
             </div>
         </section>
 
-        <!-- Closing CTA -->
         <section class="closing">
             <div class="wrap reveal">
-                <span class="eyebrow eyebrow--center">Affordable luxury, at your door</span>
+                <span class="eyebrow">Affordable luxury, at your door</span>
                 <h2>Give laundry day back to <em>your family.</em></h2>
                 <p>Book a pickup in a minute, or call or text us and we'll take it from there.</p>
-                <div class="ctas">
-                    <a href="scheduling_page.html" class="btn btn-light">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+                <div class="cta-row">
+                    <a href="scheduling_page.html" class="btn btn-light">Book a Pickup <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></svg></a>
                     <a href="tel:+12707762464" class="btn btn-outline-light">Call or text (270) 776-2464</a>
                 </div>
             </div>
@@ -344,7 +367,7 @@
                     <p class="footer-tagline">We pick it up. We bring it back clean.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Explore</h4>
+                    <h2 class="footer-h">Explore</h2>
                     <ul>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="scheduling_page.html">Book Now</a></li>
@@ -353,14 +376,14 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Call or Text</h4>
+                    <h2 class="footer-h">Call or Text</h2>
                     <ul>
                         <li><a href="tel:+12707762464" class="footer-phone">(270) 776-2464</a></li>
                         <li>Franklin, KY</li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Follow Us</h4>
+                    <h2 class="footer-h">Follow Us</h2>
                     <ul>
                         <li><a href="https://www.facebook.com/profile.php?id=61589653617028" target="_blank" rel="noopener">Facebook</a></li>
                         <li><a href="https://www.instagram.com/kerrierlaundry/" target="_blank" rel="noopener">Instagram</a></li>
@@ -373,6 +396,11 @@
             </div>
         </div>
     </footer>
+
+    <div class="book-bar" id="book-bar" aria-hidden="true">
+        <p class="book-bar-text"><strong>From $25</strong>Back in 24–48 hours</p>
+        <a href="scheduling_page.html" class="btn btn-light" tabindex="-1">Book a Pickup</a>
+    </div>
 
     <a href="https://m.me/61589653617028" target="_blank" rel="noopener" class="fb-chat-btn" aria-label="Chat with us on Facebook Messenger" title="Chat with us on Facebook">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -657,7 +685,7 @@
         });
 
     </script>
-    <script src="site.js?v=5" defer></script>
+    <script src="site.js?v=6" defer></script>
 
 </body>
 </html>
