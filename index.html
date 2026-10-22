@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TRHVRLHR');</script>
-    <!-- End Google Tag Manager -->
-
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE5SQEG4XH"></script>
     <script>
@@ -37,15 +29,10 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=7">
+    <link rel="stylesheet" href="business.styles.css?v=8">
     <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TRHVRLHR"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <a class="skip-link" href="#main">Skip to content</a>
 
@@ -517,53 +504,103 @@
             if (e.key === "Enter") { e.preventDefault(); setTimeout(checkAddress, 150); }
         });
 
+        const MSG_NOT_FOUND = "We couldn't find that address. Try adding the street number, city and state.";
+        const MSG_UNAVAILABLE = "We couldn't check that address right now. Please try again in a moment, or call or text us at (270) 776-2464.";
+        let pendingCheck = 0;
+
+        // Analytics: counts and distance ranges only, never the typed address.
+        function distanceBucket(miles) {
+            if (miles <= 5) return "0-5";
+            if (miles <= 10) return "5-10";
+            if (miles <= 15) return "10-15";
+            if (miles <= 25) return "15-25";
+            return "25+";
+        }
+        function trackCheck(result, params) {
+            if (typeof window.kerrierTrack !== "function") return;
+            const p = { result };
+            if (params) Object.assign(p, params);
+            window.kerrierTrack("address_check", p);
+        }
+        function failCheck(msg, errorType) {
+            showLoading(false);
+            showError(msg);
+            trackCheck("error", { error_type: errorType });
+        }
+
         function checkAddress() {
             const address = document.getElementById("address-input").value.trim();
             if (!address) { showError("Please enter your address first."); return; }
-            if (!distanceService) { showError("The map is still loading. Please try again in a moment."); return; }
+            if (!distanceService) { showError("The map is still loading. Please try again in a moment."); trackCheck("error", { error_type: "maps_not_loaded" }); return; }
             hideAll();
             showLoading(true);
-            distanceService.getDistanceMatrix(
-                {
-                    origins: [ORIGIN],
-                    destinations: [address],
-                    travelMode: google.maps.TravelMode.DRIVING,
-                    unitSystem: google.maps.UnitSystem.IMPERIAL,
-                },
-                handleDistanceResult
-            );
+            const checkId = ++pendingCheck;
+            // If Google never answers, don't leave the visitor waiting forever.
+            const timer = setTimeout(function () {
+                if (checkId !== pendingCheck) return;
+                pendingCheck++;
+                failCheck(MSG_UNAVAILABLE, "timeout");
+            }, 15000);
+            try {
+                const req = distanceService.getDistanceMatrix(
+                    {
+                        origins: [ORIGIN],
+                        destinations: [address],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        unitSystem: google.maps.UnitSystem.IMPERIAL,
+                    },
+                    function (response, status) {
+                        if (checkId !== pendingCheck) return; // timed out or superseded
+                        clearTimeout(timer);
+                        handleDistanceResult(response, status);
+                    }
+                );
+                // Newer Maps versions also return a Promise; errors are handled in the callback.
+                if (req && typeof req.catch === "function") req.catch(function () {});
+            } catch (err) {
+                if (checkId !== pendingCheck) return;
+                pendingCheck++;
+                clearTimeout(timer);
+                failCheck(MSG_UNAVAILABLE, "request_failed");
+            }
         }
 
         function handleDistanceResult(response, status) {
             showLoading(false);
-            if (status !== "OK") { showError("Could not reach Google Maps. Please try again."); return; }
-            const element = response.rows[0].elements[0];
-            if (element.status === "NOT_FOUND" || element.status === "ZERO_RESULTS") {
-                showError("Address not found. Please try a more specific address.");
+            if (status !== "OK") { failCheck(MSG_UNAVAILABLE, "request_" + String(status || "unknown").toLowerCase()); return; }
+            const element = response && response.rows && response.rows[0] && response.rows[0].elements && response.rows[0].elements[0];
+            if (!element || element.status !== "OK" || !element.distance || typeof element.distance.value !== "number") {
+                const st = !element ? "no_element" : (element.status && element.status !== "OK" ? element.status : "no_distance");
+                const notFound = st === "NOT_FOUND" || st === "ZERO_RESULTS" || st === "no_element" || st === "no_distance";
+                failCheck(notFound ? MSG_NOT_FOUND : MSG_UNAVAILABLE, "element_" + String(st).toLowerCase());
                 return;
             }
             const miles = element.distance.value / 1609.34;
             const milesRounded = Math.round(miles * 10) / 10;
             const address = document.getElementById("address-input").value.trim();
 
-            const place = autocomplete.getPlace();
-            if (place && place.geometry) {
-                placeUserMarker(place.geometry.location);
-            } else {
-                const geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ address }, (results, geoStatus) => {
-                    if (geoStatus === "OK" && results[0]) placeUserMarker(results[0].geometry.location);
-                });
-            }
+            try {
+                const place = autocomplete && autocomplete.getPlace();
+                if (place && place.geometry) {
+                    placeUserMarker(place.geometry.location);
+                } else {
+                    const geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ address }, (results, geoStatus) => {
+                        if (geoStatus === "OK" && results[0]) placeUserMarker(results[0].geometry.location);
+                    });
+                }
+            } catch (err) { /* the map pin is optional */ }
 
             if (miles <= SERVICE_RADIUS_MILES) {
                 silentLog({ address, miles: milesRounded, zone: "In Zone", bags: "—", total: "—", name: "—", phone: "—" });
                 displayInZone(milesRounded);
+                trackCheck("in_area", { distance_bucket: distanceBucket(miles) });
             } else {
                 const extraMiles = Math.ceil(miles - SERVICE_RADIUS_MILES);
                 const extraCharge = (extraMiles * EXTRA_MILE_RATE).toFixed(2);
                 silentLog({ address, miles: milesRounded, zone: "Out of Zone", bags: "—", total: "—", name: "—", phone: "—" });
                 displayOutOfZone(milesRounded, extraMiles, extraCharge);
+                trackCheck("out_of_area", { distance_bucket: distanceBucket(miles) });
             }
         }
 
@@ -685,7 +722,7 @@
         });
 
     </script>
-    <script src="site.js?v=7" defer></script>
+    <script src="site.js?v=8" defer></script>
 
 </body>
 </html>
