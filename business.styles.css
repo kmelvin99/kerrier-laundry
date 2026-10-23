@@ -1,5 +1,5 @@
 /* ==========================================================
-   Kerrier Laundry Co. — Site stylesheet v8 (all pages)
+   Kerrier Laundry Co. — Site stylesheet v9 (all pages)
    Apple-style discipline in Kerrier's own colors:
    brand navy #163551 / deep navy #0F2539, logo cream #FCF9F4 /
    warm linen #F4EDE3, brass #B08D57 used sparingly.
@@ -196,7 +196,8 @@ p { text-wrap: pretty; }
 .site-header.is-scrolled { border-bottom-color: var(--hairline); }
 .header-inner { height: 100%; display: flex; align-items: center; gap: 28px; }
 .brand { flex-shrink: 0; display: flex; align-items: center; min-height: 44px; }
-.brand img { height: 32px; width: auto; mix-blend-mode: multiply; }
+.brand picture { display: flex; }
+.brand img { height: 32px; width: auto; } /* transparent PNG/WebP: frosted glass shows through */
 .main-nav { margin-left: auto; }
 .main-nav ul { list-style: none; display: flex; gap: 4px; }
 .main-nav li a {

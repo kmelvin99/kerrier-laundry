@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=8">
+    <link rel="stylesheet" href="business.styles.css?v=9">
     <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -39,7 +39,10 @@
     <header class="site-header" id="site-header">
         <div class="wrap-wide header-inner">
             <a href="index.html" class="brand" aria-label="Kerrier Laundry Co. — Home">
-                <img src="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png" srcset="https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_400/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 1x, https://res.cloudinary.com/dmwtfsqz5/image/upload/e_trim:10/w_800/q_auto,f_auto/Kerrier_Title_Card_texdzt.png 2x" alt="Kerrier Laundry Co." width="188" height="42" fetchpriority="high">
+                <picture>
+                    <source type="image/webp" srcset="images/logo-nav.webp 1x, images/logo-nav@2x.webp 2x">
+                    <img src="images/logo-nav.png" srcset="images/logo-nav.png 1x, images/logo-nav@2x.png 2x" alt="Kerrier Laundry Co." width="400" height="90" fetchpriority="high">
+                </picture>
             </a>
             <nav class="main-nav" id="main-nav" aria-label="Main">
                 <ul>
@@ -722,7 +725,7 @@
         });
 
     </script>
-    <script src="site.js?v=8" defer></script>
+    <script src="site.js?v=9" defer></script>
 
 </body>
 </html>
