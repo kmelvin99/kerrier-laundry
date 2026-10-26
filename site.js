@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v11 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v12 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -228,4 +228,47 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
         setTimeout(check, 0);
         setTimeout(check, 400);
     };
+})();
+
+// ── "Get Deals" side tab (all pages) ─────────────────────────
+// A plain link to #footer-signup (works without JS). With JS it
+// smooth-scrolls, highlights the signup, focuses the email box, sends a
+// GA4 event, and hides itself while the signup is already on screen.
+(function () {
+    var tab = document.getElementById("deals-tab");
+    var target = document.getElementById("footer-signup");
+    if (!tab || !target) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var hideTimer;
+
+    function setHidden(hidden) {
+        tab.classList.toggle("is-hidden", hidden);
+        tab.setAttribute("aria-hidden", String(hidden));
+        tab.tabIndex = hidden ? -1 : 0;
+    }
+    if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { setHidden(e.isIntersecting); });
+        }, { threshold: 0.15 }).observe(target);
+    }
+
+    function focusSignup() {
+        var input = target.querySelector('input[type="email"], input[name="fields[email]"]');
+        if (input && input.offsetParent !== null) { input.focus({ preventScroll: true }); return; }
+        // Form not rendered yet (slow network): focus the section instead.
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+    }
+
+    tab.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (typeof window.kerrierTrack === "function") window.kerrierTrack("deals_tab_click", {});
+        target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+        target.classList.remove("is-highlight");
+        void target.offsetWidth; // restart the highlight animation
+        target.classList.add("is-highlight");
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(function () { target.classList.remove("is-highlight"); }, 2200);
+        setTimeout(focusSignup, reduce ? 0 : 450);
+    });
 })();
