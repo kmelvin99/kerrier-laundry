@@ -810,7 +810,7 @@ p { text-wrap: pretty; }
 
 
 /* ==========================================================
-   v7 — Navy rhythm: deep-navy bands alternate with cream
+   v7: Navy rhythm: deep-navy bands alternate with cream
    ========================================================== */
 .section--navy, .section--ink, .page-hero--navy, .card--navy, .card--ink {
     --hairline: rgba(252, 249, 244, .14);
