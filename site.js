@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v10 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v11 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -6,17 +6,16 @@
 // Only send counts and categories here: never names, phones, emails
 // or typed addresses.
 // ── Form backend (swap here) ─────────────────────────────────
-// Every site form (out-of-area lead form and newsletter signup) posts
-// JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
-// form on kerrierlaundryco@gmail.com. To move to an email tool later,
+// The out-of-area lead form posts JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
+// form on kerrierlaundryco@gmail.com. (The footer newsletter is
+// a MailerLite embed and does not use this.) To move to an email tool later,
 // change this URL (and, if that tool needs a different body, the
 // buildBody function below).
 var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
 
 (function () {
     var SUBJECTS = {
-        map_form: "Out of area inquiry",
-        newsletter_footer: "Newsletter signup"
+        map_form: "Out of area inquiry"
     };
     function buildBody(data) {
         var body = {};
@@ -205,66 +204,28 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
     document.querySelectorAll(".footer-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
 
-// ── Newsletter signup (footer, all pages) ────────────────────
+// ── Footer newsletter (MailerLite embedded form, all pages) ──
+// MailerLite renders and submits the form itself. We only watch for its
+// success state and send a GA4 event with no personal info.
 (function () {
-    var form = document.getElementById("newsletter-form");
-    if (!form) return;
-    var first = form.querySelector("#nl-first");
-    var email = form.querySelector("#nl-email");
-    var consent = form.querySelector("#nl-consent");
-    var gotcha = form.querySelector("#nl-gotcha");
-    var btn = form.querySelector(".signup-btn");
-    var msg = form.querySelector(".signup-msg");
-    var SUCCESS = "Thanks! Watch your inbox for our next email.";
-
-    function say(text, kind) {
-        msg.textContent = text;
-        msg.className = "signup-msg" + (kind ? " is-" + kind : "");
+    var root = document.getElementById("footer-signup");
+    if (!root || !("MutationObserver" in window)) return;
+    var sent = false, obs;
+    function check() {
+        if (sent) return;
+        var ok = root.querySelector(".ml-form-successBody");
+        if (!ok || ok.style.display === "none" || !ok.getClientRects().length) return;
+        sent = true;
+        if (obs) obs.disconnect();
+        if (typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "footer" });
     }
-    function invalid(el, text) {
-        el.setAttribute("aria-invalid", "true");
-        say(text, "error");
-        el.focus();
-    }
-    [email, consent].forEach(function (el) {
-        el.addEventListener("input", function () { el.removeAttribute("aria-invalid"); if (msg.classList.contains("is-error")) say(""); });
-        el.addEventListener("change", function () { el.removeAttribute("aria-invalid"); });
-    });
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (btn.disabled) return;
-        var addr = email.value.trim();
-        email.value = addr;
-        if (!addr) return invalid(email, "Please enter your email address.");
-        if (!email.checkValidity()) return invalid(email, "Please check your email address.");
-        if (!consent.checked) return invalid(consent, "Please check the box so we can email you.");
-
-        var done = function () {
-            form.classList.add("is-done");
-            say(SUCCESS, "success");
-        };
-        // Bots fill the hidden field. Pretend it worked and send nothing.
-        if (gotcha && gotcha.value) { done(); return; }
-
-        btn.disabled = true;
-        btn.textContent = "Signing you up...";
-        say("");
-        window.kerrierSubmitForm({
-            source: form.getAttribute("data-source") || "newsletter_footer",
-            first_name: first.value.trim(),
-            email: addr,
-            consent: "yes",
-            subscriber: "yes"
-        }).then(function (ok) {
-            if (ok) {
-                done();
-                if (typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "footer" });
-            } else {
-                btn.disabled = false;
-                btn.textContent = "Sign me up";
-                say("Something went wrong. Please try again, or call or text us at (270) 776-2464.", "error");
-            }
-        });
-    });
+    obs = new MutationObserver(check);
+    obs.observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ["style", "class"] });
+    // MailerLite's documented hook after a successful subscribe (chained, not replaced).
+    var prev = window.ml_webform_after_success;
+    window.ml_webform_after_success = function () {
+        try { if (typeof prev === "function") prev.apply(this, arguments); } catch (e) {}
+        setTimeout(check, 0);
+        setTimeout(check, 400);
+    };
 })();

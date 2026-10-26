@@ -23,8 +23,14 @@
     <link rel="preconnect" href="https://res.cloudinary.com">
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="business.styles.css?v=10">
+    <link rel="stylesheet" href="business.styles.css?v=11">
     <script>document.documentElement.classList.add("js");</script>
+<!-- MailerLite Universal -->
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2742056');
+</script>
+<!-- End MailerLite Universal -->
 </head>
 <body>
 
@@ -130,34 +136,8 @@
 
     <footer class="site-footer">
         <div class="wrap">
-            <section class="footer-signup" aria-labelledby="signup-title">
-                <div class="signup-copy">
-                    <h2 id="signup-title" class="signup-title">Deals and laundry tips, <em>in your inbox.</em></h2>
-                    <p class="signup-sub">Be the first to hear about specials from Kerrier Laundry Co, plus easy ways to keep your clothes looking their best.</p>
-                </div>
-                <form class="signup-form" id="newsletter-form" data-source="newsletter_footer" novalidate>
-                    <div class="signup-fields">
-                        <div class="signup-field">
-                            <label for="nl-first">First name <span class="opt">(optional)</span></label>
-                            <input type="text" id="nl-first" name="first_name" autocomplete="given-name" maxlength="80" />
-                        </div>
-                        <div class="signup-field">
-                            <label for="nl-email">Email</label>
-                            <input type="email" id="nl-email" name="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="nl-msg" />
-                        </div>
-                    </div>
-                    <label class="consent consent-light" for="nl-consent">
-                        <input type="checkbox" id="nl-consent" name="consent" value="yes" />
-                        <span>Yes, email me Kerrier Laundry Co deals and laundry tips. Unsubscribe anytime.</span>
-                    </label>
-                    <div class="hp-field" aria-hidden="true">
-                        <label for="nl-gotcha">Leave this empty</label>
-                        <input type="text" id="nl-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" />
-                    </div>
-                    <button type="submit" class="btn btn-light signup-btn">Sign me up</button>
-                    <p class="signup-note">About one email a week. We never sell or share your info.</p>
-                    <p class="signup-msg" id="nl-msg" role="status" aria-live="polite"></p>
-                </form>
+            <section class="footer-signup" id="footer-signup" aria-label="Email newsletter signup">
+                <div class="ml-embedded" data-form="27MjK6"></div>
             </section>
             <div class="footer-grid">
                 <div class="footer-brand">
@@ -201,7 +181,7 @@
         </svg>
     </a>
 
-    <script src="site.js?v=10" defer></script>
+    <script src="site.js?v=11" defer></script>
 
 </body>
 </html>
