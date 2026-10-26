@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=9">
+    <link rel="stylesheet" href="business.styles.css?v=10">
     <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -312,7 +312,12 @@
                                 <div class="lead-fields">
                                     <input type="text" id="lead-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
                                     <input type="tel" id="lead-phone" placeholder="Phone number" autocomplete="tel" aria-label="Phone number" />
+                                    <input type="email" id="lead-email" placeholder="Email (optional)" autocomplete="email" inputmode="email" maxlength="254" aria-label="Email (optional)" />
                                 </div>
+                                <label class="consent" for="lead-consent" id="lead-consent-wrap">
+                                    <input type="checkbox" id="lead-consent" value="yes" />
+                                    <span>Yes, email me Kerrier Laundry Co deals and laundry tips. Unsubscribe anytime.</span>
+                                </label>
                                 <button type="button" id="lead-submit-btn" class="btn btn-primary">Contact Me About Service</button>
                                 <div id="lead-success" class="lead-success hidden">✓ Got it! We'll be in touch soon.</div>
                                 <div id="lead-submit-error" class="lead-submit-error hidden"></div>
@@ -351,6 +356,35 @@
 
     <footer class="site-footer">
         <div class="wrap">
+            <section class="footer-signup" aria-labelledby="signup-title">
+                <div class="signup-copy">
+                    <h2 id="signup-title" class="signup-title">Deals and laundry tips, <em>in your inbox.</em></h2>
+                    <p class="signup-sub">Be the first to hear about specials from Kerrier Laundry Co, plus easy ways to keep your clothes looking their best.</p>
+                </div>
+                <form class="signup-form" id="newsletter-form" data-source="newsletter_footer" novalidate>
+                    <div class="signup-fields">
+                        <div class="signup-field">
+                            <label for="nl-first">First name <span class="opt">(optional)</span></label>
+                            <input type="text" id="nl-first" name="first_name" autocomplete="given-name" maxlength="80" />
+                        </div>
+                        <div class="signup-field">
+                            <label for="nl-email">Email</label>
+                            <input type="email" id="nl-email" name="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="nl-msg" />
+                        </div>
+                    </div>
+                    <label class="consent consent-light" for="nl-consent">
+                        <input type="checkbox" id="nl-consent" name="consent" value="yes" />
+                        <span>Yes, email me Kerrier Laundry Co deals and laundry tips. Unsubscribe anytime.</span>
+                    </label>
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="nl-gotcha">Leave this empty</label>
+                        <input type="text" id="nl-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" />
+                    </div>
+                    <button type="submit" class="btn btn-light signup-btn">Sign me up</button>
+                    <p class="signup-note">About one email a week. We never sell or share your info.</p>
+                    <p class="signup-msg" id="nl-msg" role="status" aria-live="polite"></p>
+                </form>
+            </section>
             <div class="footer-grid">
                 <div class="footer-brand">
                     <p class="footer-name">Kerrier<span>Laundry Co</span></p>
@@ -483,7 +517,7 @@
             new google.maps.Marker({
                 map,
                 position: ORIGIN,
-                title: "Kerrier Laundry Co. — Franklin, KY",
+                title: "Kerrier Laundry Co, Franklin, KY",
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 8,
@@ -616,7 +650,7 @@
         }
 
         function displayOutOfZone(miles, extraMiles, extraCharge) {
-            document.getElementById("out-zone-title").textContent = "You're " + miles + " miles away — just outside our standard area.";
+            document.getElementById("out-zone-title").textContent = "You're " + miles + " miles away, just outside our standard area.";
             document.getElementById("out-zone-msg").textContent = "You are " + extraMiles + " mile" + (extraMiles > 1 ? "s" : "") + " outside our " + SERVICE_RADIUS_MILES + "-mile zone. An additional mileage fee of $" + extraCharge + " (" + extraMiles + " mi × $" + EXTRA_MILE_RATE.toFixed(2) + ") would apply on top of standard pricing. Leave your details and we'll reach out to discuss!";
             document.getElementById("out-of-zone").classList.remove("hidden");
         }
@@ -641,35 +675,44 @@
         }
 
         document.getElementById("lead-submit-btn").addEventListener("click", async function () {
+            const btn = this;
+            const errEl = document.getElementById("lead-submit-error");
             const name = document.getElementById("lead-name").value.trim();
             const phone = document.getElementById("lead-phone").value.trim();
+            const emailEl = document.getElementById("lead-email");
+            const email = emailEl.value.trim();
+            const consent = document.getElementById("lead-consent").checked;
             const address = document.getElementById("address-input").value.trim();
-            if (!name || !phone) {
-                document.getElementById("lead-submit-error").textContent = "Please enter your name and phone number.";
-                document.getElementById("lead-submit-error").classList.remove("hidden");
-                return;
-            }
-            this.textContent = "Sending...";
-            this.disabled = true;
-            document.getElementById("lead-submit-error").classList.add("hidden");
+            function fail(msg) { errEl.textContent = msg; errEl.classList.remove("hidden"); }
+            if (!name || !phone) { fail("Please enter your name and phone number."); return; }
+            if (email && !emailEl.checkValidity()) { fail("Please check your email address."); emailEl.focus(); return; }
+            if (consent && !email) { fail("Please add your email so we can send you deals and tips."); emailEl.focus(); return; }
+            btn.textContent = "Sending...";
+            btn.disabled = true;
+            errEl.classList.add("hidden");
             silentLog({ address, miles: "Out of Zone", zone: "Out of Zone", bags: "—", total: "—", name, phone });
-            try {
-                const response = await fetch("https://formspree.io/f/mkolbevp", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, phone, address, note: "Out of zone inquiry" }),
+            // Only someone who checked the box counts as a subscriber.
+            const subscribed = consent && !!email;
+            const ok = typeof window.kerrierSubmitForm === "function" && await window.kerrierSubmitForm({
+                source: "map_form",
+                name,
+                phone,
+                email,
+                address,
+                consent: subscribed ? "yes" : "no",
+                subscriber: subscribed ? "yes" : "no",
+                note: "Out of zone inquiry",
+            });
+            if (ok) {
+                if (subscribed && typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "map_form" });
+                document.getElementById("lead-success").classList.remove("hidden");
+                ["lead-submit-btn", "lead-name", "lead-phone", "lead-email", "lead-consent-wrap"].forEach(function (id) {
+                    document.getElementById(id).classList.add("hidden");
                 });
-                if (response.ok) {
-                    document.getElementById("lead-success").classList.remove("hidden");
-                    this.classList.add("hidden");
-                    document.getElementById("lead-name").classList.add("hidden");
-                    document.getElementById("lead-phone").classList.add("hidden");
-                } else { throw new Error("Formspree error"); }
-            } catch (err) {
-                this.textContent = "Contact Me About Service";
-                this.disabled = false;
-                document.getElementById("lead-submit-error").textContent = "Something went wrong. Please message us on Facebook instead.";
-                document.getElementById("lead-submit-error").classList.remove("hidden");
+            } else {
+                btn.textContent = "Contact Me About Service";
+                btn.disabled = false;
+                fail("Something went wrong. Please message us on Facebook instead.");
             }
         });
 
@@ -725,7 +768,7 @@
         });
 
     </script>
-    <script src="site.js?v=9" defer></script>
+    <script src="site.js?v=10" defer></script>
 
 </body>
 </html>

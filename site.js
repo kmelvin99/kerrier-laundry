@@ -1,10 +1,43 @@
-/* Kerrier Laundry Co. — shared site behavior (all pages), v8 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v10 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
 // gtag is missing (blocked by an ad blocker, offline, etc.).
 // Only send counts and categories here: never names, phones, emails
 // or typed addresses.
+// ── Form backend (swap here) ─────────────────────────────────
+// Every site form (out-of-area lead form and newsletter signup) posts
+// JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
+// form on kerrierlaundryco@gmail.com. To move to an email tool later,
+// change this URL (and, if that tool needs a different body, the
+// buildBody function below).
+var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
+
+(function () {
+    var SUBJECTS = {
+        map_form: "Out of area inquiry",
+        newsletter_footer: "Newsletter signup"
+    };
+    function buildBody(data) {
+        var body = {};
+        for (var k in data) if (Object.prototype.hasOwnProperty.call(data, k)) body[k] = data[k];
+        body.submitted_at = new Date().toISOString();
+        body.page = location.pathname.split("/").pop() || "index.html";
+        if (!body._subject && SUBJECTS[body.source]) body._subject = SUBJECTS[body.source];
+        return body;
+    }
+    // Resolves true when the backend accepted the submission.
+    window.kerrierSubmitForm = function (data) {
+        try {
+            return fetch(KERRIER_FORM_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify(buildBody(data))
+            }).then(function (r) { return r.ok; }, function () { return false; });
+        } catch (e) { return Promise.resolve(false); }
+    };
+})();
+
 (function () {
     function pageName() {
         var p = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "");
@@ -170,4 +203,68 @@
 
     // Footer year
     document.querySelectorAll(".footer-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+})();
+
+// ── Newsletter signup (footer, all pages) ────────────────────
+(function () {
+    var form = document.getElementById("newsletter-form");
+    if (!form) return;
+    var first = form.querySelector("#nl-first");
+    var email = form.querySelector("#nl-email");
+    var consent = form.querySelector("#nl-consent");
+    var gotcha = form.querySelector("#nl-gotcha");
+    var btn = form.querySelector(".signup-btn");
+    var msg = form.querySelector(".signup-msg");
+    var SUCCESS = "Thanks! Watch your inbox for our next email.";
+
+    function say(text, kind) {
+        msg.textContent = text;
+        msg.className = "signup-msg" + (kind ? " is-" + kind : "");
+    }
+    function invalid(el, text) {
+        el.setAttribute("aria-invalid", "true");
+        say(text, "error");
+        el.focus();
+    }
+    [email, consent].forEach(function (el) {
+        el.addEventListener("input", function () { el.removeAttribute("aria-invalid"); if (msg.classList.contains("is-error")) say(""); });
+        el.addEventListener("change", function () { el.removeAttribute("aria-invalid"); });
+    });
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (btn.disabled) return;
+        var addr = email.value.trim();
+        email.value = addr;
+        if (!addr) return invalid(email, "Please enter your email address.");
+        if (!email.checkValidity()) return invalid(email, "Please check your email address.");
+        if (!consent.checked) return invalid(consent, "Please check the box so we can email you.");
+
+        var done = function () {
+            form.classList.add("is-done");
+            say(SUCCESS, "success");
+        };
+        // Bots fill the hidden field. Pretend it worked and send nothing.
+        if (gotcha && gotcha.value) { done(); return; }
+
+        btn.disabled = true;
+        btn.textContent = "Signing you up...";
+        say("");
+        window.kerrierSubmitForm({
+            source: form.getAttribute("data-source") || "newsletter_footer",
+            first_name: first.value.trim(),
+            email: addr,
+            consent: "yes",
+            subscriber: "yes"
+        }).then(function (ok) {
+            if (ok) {
+                done();
+                if (typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "footer" });
+            } else {
+                btn.disabled = false;
+                btn.textContent = "Sign me up";
+                say("Something went wrong. Please try again, or call or text us at (270) 776-2464.", "error");
+            }
+        });
+    });
 })();

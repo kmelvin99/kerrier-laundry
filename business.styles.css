@@ -1,5 +1,5 @@
 /* ==========================================================
-   Kerrier Laundry Co. — Site stylesheet v9 (all pages)
+   Kerrier Laundry Co. - Site stylesheet v10 (all pages)
    Apple-style discipline in Kerrier's own colors:
    brand navy #163551 / deep navy #0F2539, logo cream #FCF9F4 /
    warm linen #F4EDE3, brass #B08D57 used sparingly.
@@ -927,4 +927,49 @@ p { text-wrap: pretty; }
     .js .hero-media img, .js .photo-moment img, .js .photo-band img { transform: none; }
     .photo-card:hover img { transform: none; }
     .review-track { scroll-behavior: auto; }
+}
+
+/* ── Email capture (v10): consent checkbox + footer newsletter ── */
+.consent { display: flex; align-items: flex-start; gap: 12px; margin: 4px 0 14px; font-size: .9375rem; line-height: 1.45; color: var(--ink); cursor: pointer; text-align: left; }
+.consent input { flex-shrink: 0; width: 22px; height: 22px; margin: 0; accent-color: var(--navy); cursor: pointer; }
+.consent input:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+.lead-fields input[type="email"] { flex-basis: 100%; }
+
+.footer-signup { display: grid; grid-template-columns: 1fr 1.05fr; gap: 28px 56px; align-items: start; padding-bottom: 48px; margin-bottom: 48px; border-bottom: 1px solid var(--hairline-light); }
+.signup-title { font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.08; color: var(--cream); }
+.signup-title em { color: var(--champagne); }
+.signup-sub { margin-top: 14px; max-width: 34ch; font-size: 1rem; color: rgba(252, 249, 244, .74); }
+.signup-fields { display: grid; grid-template-columns: 1fr 1.3fr; gap: 12px; margin-bottom: 16px; }
+.signup-field label { display: block; margin-bottom: 8px; font-size: .75rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--champagne); }
+.signup-field .opt { letter-spacing: .04em; text-transform: none; color: rgba(252, 249, 244, .55); font-weight: 400; }
+.signup-field input {
+    width: 100%; min-height: 52px; padding: 0 20px; border-radius: var(--pill);
+    border: 1px solid rgba(252, 249, 244, .24); background: rgba(252, 249, 244, .06); color: var(--cream); font-size: 1.0625rem;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease);
+}
+.signup-field input:focus { outline: none; border-color: var(--champagne); background: rgba(252, 249, 244, .1); box-shadow: 0 0 0 4px rgba(216, 195, 160, .18); }
+.signup-field input[aria-invalid="true"] { border-color: #E8A29A; }
+.consent-light { color: rgba(252, 249, 244, .86); }
+.consent-light input { accent-color: var(--champagne); }
+.consent-light input:focus-visible { outline-color: var(--champagne); }
+.consent-light input[aria-invalid="true"] { outline: 2px solid #E8A29A; outline-offset: 2px; }
+.signup-btn { min-width: 200px; }
+.signup-btn:disabled { opacity: .7; cursor: wait; transform: none; }
+.signup-note { margin-top: 12px; font-size: .8125rem; color: rgba(252, 249, 244, .6); }
+.signup-msg { margin-top: 10px; font-size: .9375rem; min-height: 1.4em; }
+.signup-msg:empty { display: none; }
+.signup-msg.is-error { color: #F2B8B0; }
+.signup-msg.is-success { color: var(--cream); font-family: var(--serif); font-size: 1.5rem; font-style: italic; line-height: 1.25; }
+.signup-form.is-done .signup-fields,
+.signup-form.is-done .consent,
+.signup-form.is-done .signup-btn,
+.signup-form.is-done .signup-note { display: none; }
+.hp-field { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 833px) {
+    .footer-signup { grid-template-columns: 1fr; padding-bottom: 40px; margin-bottom: 40px; }
+}
+@media (max-width: 600px) {
+    .signup-fields { grid-template-columns: 1fr; }
+    .signup-btn { width: 100%; }
 }
