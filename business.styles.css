@@ -1,5 +1,5 @@
 /* ==========================================================
-   Kerrier Laundry Co. - Site stylesheet v12 (all pages)
+   Kerrier Laundry Co. - Site stylesheet v13 (all pages)
    Apple-style discipline in Kerrier's own colors:
    brand navy #163551 / deep navy #0F2539, logo cream #FCF9F4 /
    warm linen #F4EDE3, brass #B08D57 used sparingly.
@@ -1004,6 +1004,13 @@ p { text-wrap: pretty; }
     .footer-signup { padding-bottom: 40px; margin-bottom: 40px; }
     #footer-signup .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent { margin-bottom: 24px; }
 }
+
+/* Newsletter perk line (our markup, sits above the MailerLite embed) (v13) */
+.signup-perk { margin: 0 0 28px; padding: 0 0 22px; border-bottom: 1px solid rgba(216, 195, 160, .28); }
+.signup-perk-line { font-family: var(--serif); font-weight: 500; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.2; color: var(--cream); margin: 0 0 6px; }
+.signup-perk-line em { font-style: italic; color: var(--champagne); }
+.signup-perk-fine { font-family: var(--sans); font-size: .8125rem; line-height: 1.5; color: rgba(252, 249, 244, .62); margin: 0; }
+@media (max-width: 833px) { .signup-perk { margin-bottom: 24px; padding-bottom: 18px; } }
 
 /* MailerLite: visible field labels, if the form is set to show them */
 #footer-signup .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
