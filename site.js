@@ -6,7 +6,7 @@
 // Only send counts and categories here: never names, phones, emails
 // or typed addresses.
 // ── Form backend (swap here) ─────────────────────────────────
-// The out-of-area lead form posts JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
+// The out-of-area lead form and the Monthly Plan signup notice post JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
 // form on kerrierlaundryco@gmail.com. (The footer newsletter is
 // a MailerLite embed and does not use this.) To move to an email tool later,
 // change this URL (and, if that tool needs a different body, the
@@ -15,7 +15,8 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
 
 (function () {
     var SUBJECTS = {
-        map_form: "Out of area inquiry"
+        map_form: "Out of area inquiry",
+        monthly_plan: "New Monthly Plan signup"
     };
     function buildBody(data) {
         var body = {};
@@ -309,6 +310,17 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
             }, function () { return false; })
             .then(function (ok) {
                 if (ok) {
+                    // Email notice to us via Formspree (same helper as the out-of-area form).
+                    // Fire and forget: never delays the thank-you or shows an error.
+                    try {
+                        if (typeof window.kerrierSubmitForm === "function") window.kerrierSubmitForm({
+                            source: "monthly_plan",
+                            form_type: "Monthly Plan interest",
+                            name: (document.getElementById("plan-name").value || "").trim(),
+                            email: email.value,
+                            _subject: "New Monthly Plan signup"
+                        }).catch(function () {});
+                    } catch (err) { /* ignore */ }
                     if (typeof window.kerrierTrack === "function") window.kerrierTrack("monthly_plan_interest", { form_location: "services_pricing" });
                     form.classList.add("hidden");
                     okEl.classList.remove("hidden");
