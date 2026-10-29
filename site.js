@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v12 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v14 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -270,5 +270,53 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
         clearTimeout(hideTimer);
         hideTimer = setTimeout(function () { target.classList.remove("is-highlight"); }, 2200);
         setTimeout(focusSignup, reduce ? 0 : 450);
+    });
+})();
+
+// ── Monthly Laundry Plan interest form (services page only) ──
+// Posts to the MailerLite "Monthly Plan Interest" form (double opt-in),
+// the same subscribe endpoint MailerLite's own embeds use. The URL lives
+// in the form's action attribute in services.html, so swapping backends
+// is a one-line HTML change. GA4 gets an event with no personal info.
+(function () {
+    var form = document.getElementById("plan-form");
+    if (!form || !window.fetch || !window.FormData) return; // no JS/fetch: plain POST to the action URL
+    var email = document.getElementById("plan-email");
+    var consent = document.getElementById("plan-consent");
+    var btn = document.getElementById("plan-submit");
+    var errEl = document.getElementById("plan-error");
+    var okEl = document.getElementById("plan-success");
+    var label = btn.textContent;
+    function fail(msg, focusEl) {
+        errEl.textContent = msg; errEl.classList.remove("hidden");
+        if (focusEl) focusEl.focus();
+    }
+    email.addEventListener("input", function () { email.removeAttribute("aria-invalid"); });
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        errEl.classList.add("hidden");
+        email.value = email.value.trim();
+        if (!email.value || !email.checkValidity()) {
+            email.setAttribute("aria-invalid", "true");
+            fail("Please enter a valid email address.", email); return;
+        }
+        if (!consent.checked) { fail("Please tick the box so we can email you the details.", consent); return; }
+        btn.disabled = true; btn.textContent = "Sending...";
+        fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
+            .then(function (r) {
+                if (!r.ok) return false;
+                return r.json().then(function (j) { return !j || j.success !== false; }, function () { return true; });
+            }, function () { return false; })
+            .then(function (ok) {
+                if (ok) {
+                    if (typeof window.kerrierTrack === "function") window.kerrierTrack("monthly_plan_interest", { form_location: "services_pricing" });
+                    form.classList.add("hidden");
+                    okEl.classList.remove("hidden");
+                    okEl.focus({ preventScroll: true });
+                } else {
+                    btn.disabled = false; btn.textContent = label;
+                    fail("Something went wrong. Please call or text (270) 776-2464 and ask about the Monthly Plan.");
+                }
+            });
     });
 })();

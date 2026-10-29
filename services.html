@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://res.cloudinary.com">
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="business.styles.css?v=13">
+    <link rel="stylesheet" href="business.styles.css?v=14">
     <script>document.documentElement.classList.add("js");</script>
 <!-- MailerLite Universal -->
 <script>
@@ -178,6 +178,37 @@ ml('account', '2742056');
                         <p>Cash, Cash App, Zelle, PayPal and tap to pay.</p>
                     </div>
                 </div>
+
+                <!-- Monthly Laundry Plan interest (low-key, Services page only).
+                     Posts to the MailerLite "Monthly Plan Interest" form (group: Monthly Plan Interest, double opt-in).
+                     To swap the backend, change the form's action URL; site.js reads it from here. -->
+                <div class="card plan-card reveal" id="monthly-plan">
+                    <div class="plan-copy">
+                        <span class="plan-kicker">Ask about it</span>
+                        <h3 id="plan-title">Monthly Laundry <em>Plan</em></h3>
+                        <p>One simple monthly price for regular pickups, weekly or every 2 weeks. Leave your email and we'll send you the details.</p>
+                    </div>
+                    <form class="plan-form" id="plan-form" action="https://assets.mailerlite.com/jsonp/2742056/forms/202628223649974215/subscribe" method="post" target="_blank" novalidate>
+                        <div class="plan-fields">
+                            <label class="sr-only" for="plan-name">First name (optional)</label>
+                            <input type="text" id="plan-name" name="fields[name]" placeholder="First name (optional)" autocomplete="given-name" maxlength="100" />
+                            <label class="sr-only" for="plan-email">Email</label>
+                            <input type="email" id="plan-email" name="fields[email]" placeholder="Email" autocomplete="email" inputmode="email" maxlength="254" required aria-required="true" />
+                        </div>
+                        <label class="consent plan-consent" for="plan-consent">
+                            <input type="checkbox" id="plan-consent" required aria-required="true" />
+                            <span>Send me Monthly Plan info and occasional emails from Kerrier Laundry Co. Unsubscribe anytime.</span>
+                        </label>
+                        <input type="hidden" name="ml-submit" value="1" />
+                        <input type="hidden" name="anticsrf" value="true" />
+                        <button type="submit" class="btn btn-light plan-submit" id="plan-submit">Ask about the Monthly Plan</button>
+                        <div class="plan-error hidden" id="plan-error" role="alert"></div>
+                    </form>
+                    <div class="plan-success hidden" id="plan-success" role="status" tabindex="-1">
+                        <strong>Thanks! Check your inbox.</strong>
+                        <span>Confirm your email and we'll send you the Monthly Plan details.</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -284,7 +315,7 @@ ml('account', '2742056');
         </svg>
     </a>
 
-    <script src="site.js?v=13" defer></script>
+    <script src="site.js?v=14" defer></script>
 
 </body>
 </html>

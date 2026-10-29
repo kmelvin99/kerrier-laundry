@@ -1051,3 +1051,40 @@ html.menu-open .deals-tab { opacity: 0; visibility: hidden; }
     .footer-signup.is-highlight { animation: none; box-shadow: 0 0 0 6px rgba(216, 195, 160, .3); }
 }
 @media print { .deals-tab { display: none; } }
+
+/* ==========================================================
+   v14: Monthly Laundry Plan interest card (services, under pricing)
+   ========================================================== */
+.plan-card {
+    margin-top: 20px;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: center;
+}
+.plan-kicker { display: inline-block; font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--champagne); margin-bottom: 10px; }
+.plan-copy h3 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); margin-bottom: 10px; }
+.plan-copy p { font-size: 1rem; max-width: 30em; }
+.plan-fields { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.plan-fields input {
+    flex: 1; min-width: 160px; min-height: 52px; padding: 0 22px; border-radius: var(--pill);
+    border: 1px solid rgba(252, 249, 244, .28); background: #FFFFFF; color: #1C2733; font-size: 1.0625rem;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.plan-fields input::placeholder { color: #6B747D; }
+.plan-fields input:focus { outline: none; border-color: var(--champagne); box-shadow: 0 0 0 4px rgba(216, 195, 160, .35); }
+.plan-fields input[aria-invalid="true"] { border-color: #E8A39B; box-shadow: 0 0 0 4px rgba(232, 163, 155, .28); }
+.section--navy .plan-consent { color: var(--on-navy); font-size: .875rem; }
+.section--navy .plan-consent input { accent-color: var(--champagne); }
+.section--navy .plan-consent input:focus-visible { outline-color: var(--champagne); }
+.plan-submit { width: 100%; }
+.plan-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.plan-error { margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm); background: #FBEFEE; color: #8E2B22; font-size: .9rem; text-align: center; }
+.plan-success { padding: 20px 22px; border-radius: var(--radius); background: rgba(252, 249, 244, .10); border: 1px solid rgba(216, 195, 160, .38); text-align: center; animation: rise .5s var(--ease); outline: none; }
+.plan-success strong { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--cream); margin-bottom: 4px; }
+.plan-success span { color: var(--on-navy); font-size: .9375rem; }
+@media (max-width: 833px) {
+    .plan-card { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+    .plan-card { margin-top: 16px; }
+    .plan-fields { flex-direction: column; }
+    .plan-fields input { min-width: 0; width: 100%; }
+}
