@@ -625,6 +625,12 @@ p { text-wrap: pretty; }
 .cal-card-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 8px 10px 18px; border-bottom: 1px solid var(--hairline); margin-bottom: 12px; }
 .cal-card-head h2 { font-size: 1.75rem; }
 .cal-card-head p { font-size: .9rem; color: var(--muted); }
+.cal-card-head-text { min-width: 0; }
+.cal-card-head-text p { margin-top: 4px; }
+/* Booking page: small secondary "Text us instead" link beside the calendar */
+.cal-text-btn { flex-shrink: 0; gap: 7px; white-space: nowrap; }
+.cal-text-btn svg { width: 15px; height: 15px; }
+.cal-text-btn:hover svg { transform: none; }
 .cal-wrapper { min-height: 600px; width: 100%; position: relative; }
 .cal-wrapper::before { /* placeholder shown until Cal.com paints its iframe */
     content: "Loading available times…"; position: absolute; inset: 0; display: grid; place-items: center;
@@ -804,6 +810,7 @@ p { text-wrap: pretty; }
     /* Mobile booking fix (kept): full-bleed calendar so the Cal.com frame gets the full width */
     .cal-card { margin-inline: -20px; padding: 0; border-radius: 0; border-left: 0; border-right: 0; box-shadow: none; }
     .cal-card-head { padding: 18px 20px 14px; margin-bottom: 0; }
+    .cal-text-btn { margin-top: 8px; }
 }
 @media (max-width: 420px) { .hide-xs { display: none; } }
 @media (max-width: 833px) { .book-grid { display: flex; flex-direction: column; } .book-grid > * { width: 100%; } }

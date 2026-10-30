@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v14 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v15 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -83,8 +83,19 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
     // Cal.com booking embed (booking page only). Listeners are queued on the
     // "15min" namespace and attach when Cal's embed.js loads.
     // Documented public events: linkReady, bookerReady, bookingSuccessfulV2,
-    // bookingSuccessful (deprecated), linkFailed. Cal exposes no event for
-    // picking a date or time slot, so time_selected cannot be tracked here.
+    // bookingSuccessful (deprecated), linkFailed. Cal exposes NO event for
+    // picking a date or a time slot (checked against Cal's embed source and
+    // live on Oct 30 2026), so the two middle funnel steps use proxies:
+    //   booking_calendar_used: first __routeChanged after the calendar loads.
+    //     Cal fires __routeChanged (no data) whenever the booker changes its
+    //     URL: picking a date, changing month, picking a time, going back.
+    //   booking_time_selected: a time was picked and the details form opened.
+    //     Picking a time is the only step that makes the calendar frame
+    //     taller (+52px desktop, +146px mobile in testing; month changes and
+    //     date picks keep the height). So: after a route change, the frame
+    //     grows by FORM_GROWTH_PX or more over its loaded height.
+    // Funnel: calendar_loaded > booking_calendar_used > booking_time_selected
+    //   > booking_completed. Each fires at most once per page view.
     try {
         var cal = window.Cal && window.Cal.ns && window.Cal.ns["15min"];
         if (typeof cal === "function") {
@@ -108,6 +119,31 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
             };
             on("bookingSuccessfulV2", booked);
             on("bookingSuccessful", booked); // older name, de-duplicated by once()
+
+            // Middle of the funnel (proxies, see note above).
+            var FORM_GROWTH_PX = 30;
+            var baseH = 0, baseW = 0, lastH = 0, lastW = 0, ready = false, moved = false;
+            var setBase = function () { if (lastH) { baseH = lastH; baseW = lastW; } ready = true; };
+            on("__dimensionChanged", function (e) {
+                var d = (e && e.detail && e.detail.data) || {};
+                var h = +d.iframeHeight || 0, w = +d.iframeWidth || 0;
+                if (!h) return;
+                lastH = h; lastW = w;
+                if (!ready) return;
+                // Before any click, or after a width change (rotation, resize),
+                // just re-measure the resting height; don't count it.
+                if (!moved || !baseH || (baseW && w && Math.abs(w - baseW) > 2)) { baseH = h; baseW = w; return; }
+                if (moved && h - baseH >= FORM_GROWTH_PX) {
+                    once("booking_time_selected", { embed_event: "route_change_and_form_height" });
+                }
+            });
+            on("linkReady", setBase);
+            on("bookerReady", setBase);
+            on("__routeChanged", function () {
+                if (!ready) return;
+                moved = true;
+                once("booking_calendar_used", { embed_event: "__routeChanged" });
+            });
         }
     } catch (e) { /* never break the page over analytics */ }
 })();
