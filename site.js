@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v15 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v16 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -6,7 +6,7 @@
 // Only send counts and categories here: never names, phones, emails
 // or typed addresses.
 // ── Form backend (swap here) ─────────────────────────────────
-// The out-of-area lead form and the Monthly Plan signup notice post JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
+// The out-of-area lead form, the out-of-zone address check notice and the Monthly Plan signup notice post JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
 // form on kerrierlaundryco@gmail.com. (The footer newsletter is
 // a MailerLite embed and does not use this.) To move to an email tool later,
 // change this URL (and, if that tool needs a different body, the
@@ -16,11 +16,19 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
 (function () {
     var SUBJECTS = {
         map_form: "Out of area inquiry",
-        monthly_plan: "New Monthly Plan signup"
+        monthly_plan: "New Monthly Plan signup",
+        zone_check: "Out of zone address check"
     };
     function buildBody(data) {
         var body = {};
         for (var k in data) if (Object.prototype.hasOwnProperty.call(data, k)) body[k] = data[k];
+        // Formspree uses "email" (and "_replyto") as the reply-to address and
+        // rejects a blank one, so leave them out when nobody typed an email.
+        ["email", "_replyto"].forEach(function (key) {
+            if (!Object.prototype.hasOwnProperty.call(body, key)) return;
+            var v = body[key] == null ? "" : String(body[key]).trim();
+            if (v) body[key] = v; else delete body[key];
+        });
         body.submitted_at = new Date().toISOString();
         body.page = location.pathname.split("/").pop() || "index.html";
         if (!body._subject && SUBJECTS[body.source]) body._subject = SUBJECTS[body.source];

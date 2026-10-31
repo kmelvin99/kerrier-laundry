@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=15">
+    <link rel="stylesheet" href="business.styles.css?v=16">
     <script>document.documentElement.classList.add("js");</script>
 <!-- MailerLite Universal -->
 <script>
@@ -623,6 +623,7 @@ ml('account', '2742056');
                 const extraCharge = (extraMiles * EXTRA_MILE_RATE).toFixed(2);
                 silentLog({ address, miles: milesRounded, zone: "Out of Zone", bags: "—", total: "—", name: "—", phone: "—" });
                 displayOutOfZone(milesRounded, extraMiles, extraCharge);
+                notifyZoneCheck(response, milesRounded, extraMiles, extraCharge);
                 trackCheck("out_of_area", { distance_bucket: distanceBucket(miles) });
             }
         }
@@ -702,6 +703,59 @@ ml('account', '2742056');
             }
         });
 
+        // Email notice to us (Formspree) when an address checks Out of Zone.
+        // Town and state only: never the street address or ZIP.
+        // At most once per town per page view; never blocks the page, failures are silent.
+        const zoneNoticeSent = {};
+        function townFromPlace(place) {
+            const comps = place && place.address_components;
+            if (!comps || !comps.length) return "";
+            const pick = function (type) {
+                const c = comps.find(function (x) { return x.types && x.types.indexOf(type) !== -1; });
+                return c ? c : null;
+            };
+            const city = pick("locality") || pick("postal_town") || pick("sublocality") || pick("administrative_area_level_3");
+            const state = pick("administrative_area_level_1");
+            if (!city) return "";
+            return city.long_name + (state ? ", " + state.short_name : "");
+        }
+        function townFromMatrix(response) {
+            // e.g. "123 Main St, Bowling Green, KY 42101, USA" -> "Bowling Green, KY"
+            const full = response && response.destinationAddresses && response.destinationAddresses[0];
+            if (!full) return "";
+            const parts = String(full).split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+            if (parts.length && /^(USA|United States)$/i.test(parts[parts.length - 1])) parts.pop();
+            if (parts.length < 2) return "";
+            const state = parts[parts.length - 1].split(/\s+/)[0];
+            const city = parts[parts.length - 2];
+            if (!/^[A-Z]{2}$/.test(state) || /\d/.test(city)) return "";
+            return city + ", " + state;
+        }
+        function notifyZoneCheck(response, miles, extraMiles, extraCharge) {
+            try {
+                // The Distance Matrix answer matches the address actually checked;
+                // the Places pick is only a fallback (it can be from an earlier pick).
+                let town = townFromMatrix(response);
+                if (!town) { try { town = townFromPlace(autocomplete && autocomplete.getPlace()); } catch (e) { town = ""; } }
+                if (!town) town = "Unknown town";
+                const key = town.toLowerCase();
+                if (zoneNoticeSent[key]) return;
+                zoneNoticeSent[key] = true;
+                if (typeof window.kerrierSubmitForm !== "function") return;
+                const p = window.kerrierSubmitForm({
+                    source: "zone_check",
+                    form_type: "Out of zone address check",
+                    _subject: "Out of zone address check",
+                    town,
+                    miles,
+                    zone: "Out of Zone",
+                    extra_mileage_fee: "$" + extraCharge + " (" + extraMiles + " mi x $" + EXTRA_MILE_RATE.toFixed(2) + ")",
+                    note: "Address check only. They have not filled in the contact form."
+                });
+                if (p && typeof p.catch === "function") p.catch(function () {});
+            } catch (e) { /* never break the checker */ }
+        }
+
         function silentLog(data) {
             fetch(APPS_SCRIPT_URL, {
                 method: "POST",
@@ -754,7 +808,7 @@ ml('account', '2742056');
         });
 
     </script>
-    <script src="site.js?v=15" defer></script>
+    <script src="site.js?v=16" defer></script>
 
 </body>
 </html>
