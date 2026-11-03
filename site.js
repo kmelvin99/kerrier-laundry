@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v17 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v18 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if

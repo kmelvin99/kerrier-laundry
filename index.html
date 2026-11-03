@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=17">
+    <link rel="stylesheet" href="business.styles.css?v=18">
     <script>document.documentElement.classList.add("js");</script>
 <!-- MailerLite Universal -->
 <script>
@@ -682,10 +682,19 @@ ml('account', '2742056');
             // Only someone who checked the box counts as a subscriber.
             const subscribed = consent && !!email;
             // Ticked box: send the email to the MailerLite newsletter (double opt-in).
-            // A MailerLite failure never blocks the lead.
+            // Wait at most 5 seconds so the lead always goes out; the result goes in the lead email.
             let mlOk = false;
+            let mlStatus = "not requested";
             if (subscribed) {
-                mlOk = typeof window.kerrierSubscribeNewsletter === "function" && await window.kerrierSubscribeNewsletter(email, name, lastOutOfZoneTown);
+                const ML_TIMEOUT = "timeout";
+                const mlResult = typeof window.kerrierSubscribeNewsletter === "function"
+                    ? await Promise.race([
+                        window.kerrierSubscribeNewsletter(email, name, lastOutOfZoneTown),
+                        new Promise(function (resolve) { setTimeout(function () { resolve(ML_TIMEOUT); }, 5000); })
+                    ])
+                    : false;
+                mlOk = mlResult === true;
+                mlStatus = mlOk ? "sent" : (mlResult === ML_TIMEOUT ? "failed (timeout)" : "failed");
             }
             const ok = typeof window.kerrierSubmitForm === "function" && await window.kerrierSubmitForm({
                 source: "map_form",
@@ -695,6 +704,7 @@ ml('account', '2742056');
                 address,
                 consent: subscribed ? "yes" : "no",
                 subscriber: subscribed ? "yes" : "no",
+                mailerlite: mlStatus,
                 note: "Out of zone inquiry",
             });
             if (ok) {
@@ -816,7 +826,7 @@ ml('account', '2742056');
         });
 
     </script>
-    <script src="site.js?v=17" defer></script>
+    <script src="site.js?v=18" defer></script>
 
 </body>
 </html>
