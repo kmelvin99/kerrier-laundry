@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" type="image/webp" imagesrcset="images/delivery-cargo-800.webp 800w, images/delivery-cargo-1600.webp 1600w" imagesizes="(max-width: 600px) 100vw, min(1280px, calc(100vw - 48px))" fetchpriority="high">
-    <link rel="stylesheet" href="business.styles.css?v=16">
+    <link rel="stylesheet" href="business.styles.css?v=17">
     <script>document.documentElement.classList.add("js");</script>
 <!-- MailerLite Universal -->
 <script>
@@ -471,6 +471,7 @@ ml('account', '2742056');
 
         let map, autocomplete, distanceService;
         let userMarker = null;
+        let lastOutOfZoneTown = ""; // town and state of the last out-of-zone check, never the street or ZIP
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("zone-map"), {
@@ -680,6 +681,12 @@ ml('account', '2742056');
             silentLog({ address, miles: "Out of Zone", zone: "Out of Zone", bags: "—", total: "—", name, phone });
             // Only someone who checked the box counts as a subscriber.
             const subscribed = consent && !!email;
+            // Ticked box: send the email to the MailerLite newsletter (double opt-in).
+            // A MailerLite failure never blocks the lead.
+            let mlOk = false;
+            if (subscribed) {
+                mlOk = typeof window.kerrierSubscribeNewsletter === "function" && await window.kerrierSubscribeNewsletter(email, name, lastOutOfZoneTown);
+            }
             const ok = typeof window.kerrierSubmitForm === "function" && await window.kerrierSubmitForm({
                 source: "map_form",
                 name,
@@ -691,7 +698,7 @@ ml('account', '2742056');
                 note: "Out of zone inquiry",
             });
             if (ok) {
-                if (subscribed && typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "map_form" });
+                if (subscribed && mlOk && typeof window.kerrierTrack === "function") window.kerrierTrack("newsletter_signup", { form_location: "map_form" });
                 document.getElementById("lead-success").classList.remove("hidden");
                 ["lead-submit-btn", "lead-name", "lead-phone", "lead-email", "lead-consent-wrap"].forEach(function (id) {
                     document.getElementById(id).classList.add("hidden");
@@ -737,6 +744,7 @@ ml('account', '2742056');
                 // the Places pick is only a fallback (it can be from an earlier pick).
                 let town = townFromMatrix(response);
                 if (!town) { try { town = townFromPlace(autocomplete && autocomplete.getPlace()); } catch (e) { town = ""; } }
+                lastOutOfZoneTown = town;
                 if (!town) town = "Unknown town";
                 const key = town.toLowerCase();
                 if (zoneNoticeSent[key]) return;
@@ -808,7 +816,7 @@ ml('account', '2742056');
         });
 
     </script>
-    <script src="site.js?v=16" defer></script>
+    <script src="site.js?v=17" defer></script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v16 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v17 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -8,7 +8,8 @@
 // ── Form backend (swap here) ─────────────────────────────────
 // The out-of-area lead form, the out-of-zone address check notice and the Monthly Plan signup notice post JSON to this one endpoint. Today it is the "Lead Inquiry" Formspree
 // form on kerrierlaundryco@gmail.com. (The footer newsletter is
-// a MailerLite embed and does not use this.) To move to an email tool later,
+// a MailerLite embed and does not use this. A ticked newsletter box on the
+// out-of-area form also goes to MailerLite through kerrierSubscribeNewsletter.) To move to an email tool later,
 // change this URL (and, if that tool needs a different body, the
 // buildBody function below).
 var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
@@ -45,6 +46,33 @@ var KERRIER_FORM_ENDPOINT = "https://formspree.io/f/mkolbevp";
         } catch (e) { return Promise.resolve(false); }
     };
 })();
+
+// ── Newsletter subscribe (MailerLite) ───────────────────────
+// Adds an email to the website newsletter form 27MjK6 (group "Newsletter",
+// double opt-in), the same subscribe endpoint the footer embed posts to.
+// Only call this when the person ticked the newsletter box. MailerLite
+// then emails them a confirm link; they join the list after confirming.
+// Resolves true when MailerLite accepted the signup. Never throws.
+var KERRIER_NEWSLETTER_ENDPOINT = "https://assets.mailerlite.com/jsonp/2742056/forms/202354484931724608/subscribe";
+window.kerrierSubscribeNewsletter = function (email, name, town) {
+    try {
+        email = String(email || "").trim();
+        if (!email || !window.fetch || !window.FormData) return Promise.resolve(false);
+        var fd = new FormData();
+        fd.append("fields[email]", email);
+        if (name) fd.append("fields[name]", String(name).trim().split(/\s+/)[0]);
+        // Town and state only (e.g. "Bowling Green, KY"). Never a street address or ZIP.
+        town = String(town || "").replace(/\d+/g, "").replace(/\s+/g, " ").trim();
+        if (town) fd.append("fields[town_or_zip]", town);
+        fd.append("ml-submit", "1");
+        fd.append("anticsrf", "true");
+        return fetch(KERRIER_NEWSLETTER_ENDPOINT, { method: "POST", body: fd, headers: { "Accept": "application/json" } })
+            .then(function (r) {
+                if (!r.ok) return false;
+                return r.json().then(function (j) { return !j || j.success !== false; }, function () { return true; });
+            }, function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+};
 
 (function () {
     function pageName() {
