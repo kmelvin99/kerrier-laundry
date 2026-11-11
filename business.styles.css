@@ -209,6 +209,7 @@ p { text-wrap: pretty; }
 .main-nav li a[aria-current="page"] { font-weight: 500; }
 .nav-sheet-foot { display: none; }
 .header-actions { display: flex; align-items: center; gap: 12px; }
+.header-actions .btn-sm { min-height: 44px; } /* 44px tap target; fits the 52px nav */
 .header-phone { font-size: .875rem; text-decoration: none; color: var(--navy); letter-spacing: .02em; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
 .header-phone:hover { text-decoration: underline; text-underline-offset: 4px; }
 .menu-toggle {
@@ -482,8 +483,8 @@ p { text-wrap: pretty; }
 .footer-tagline { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: rgba(252, 249, 244, .8); }
 .footer-col .footer-h { font-family: var(--sans); font-weight: 500; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--champagne); margin-bottom: 12px; }
 .footer-col ul { list-style: none; display: grid; gap: 2px; }
-.footer-col li { min-height: 32px; display: flex; align-items: center; }
-.footer-col a { text-decoration: none; color: rgba(252, 249, 244, .84); transition: color .25s var(--ease); display: inline-flex; align-items: center; min-height: 36px; }
+.footer-col li { min-height: 44px; display: flex; align-items: center; }
+.footer-col a { text-decoration: none; color: rgba(252, 249, 244, .84); transition: color .25s var(--ease); display: inline-flex; align-items: center; min-height: 44px; }
 .footer-col a:hover { color: #FFFFFF; }
 .footer-phone { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--cream) !important; }
 .footer-bottom { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--hairline-light); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: rgba(252, 249, 244, .62); }
@@ -621,7 +622,7 @@ p { text-wrap: pretty; }
 .book-save p + p { margin-top: 6px; }
 .book-questions { margin-top: 20px; font-size: .9375rem; color: var(--muted); }
 .book-questions a { color: var(--navy); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(22, 53, 81, .3); }
-.cal-card { background: #FFFFFF; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); padding: clamp(14px, 2vw, 28px); overflow: hidden; border: 1px solid var(--hairline); }
+.cal-card { background: #FFFFFF; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); padding: clamp(14px, 2vw, 28px); overflow: visible; border: 1px solid var(--hairline); }
 .cal-card-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 8px 10px 18px; border-bottom: 1px solid var(--hairline); margin-bottom: 12px; }
 .cal-card-head h2 { font-size: 1.75rem; }
 .cal-card-head p { font-size: .9rem; color: var(--muted); }
@@ -631,13 +632,13 @@ p { text-wrap: pretty; }
 .cal-text-btn { flex-shrink: 0; gap: 7px; white-space: nowrap; }
 .cal-text-btn svg { width: 15px; height: 15px; }
 .cal-text-btn:hover svg { transform: none; }
-.cal-wrapper { min-height: 600px; width: 100%; position: relative; }
+.cal-wrapper { min-height: 600px; width: 100%; position: relative; overflow: visible; }
 .cal-wrapper::before { /* placeholder shown until Cal.com paints its iframe */
     content: "Loading available times…"; position: absolute; inset: 0; display: grid; place-items: center;
     color: var(--muted); font-size: .95rem; z-index: 0;
 }
 .cal-wrapper:has(iframe)::before { content: none; }
-#my-cal-inline-15min { position: relative; z-index: 1; }
+#my-cal-inline-15min { position: relative; z-index: 1; width: 100%; overflow: visible; }
 .book-note { margin-top: 18px; text-align: center; font-size: .9375rem; color: var(--muted); }
 .book-quick { display: none; }
 
@@ -1094,4 +1095,90 @@ html.menu-open .deals-tab { opacity: 0; visibility: hidden; }
     .plan-card { margin-top: 16px; }
     .plan-fields { flex-direction: column; }
     .plan-fields input { min-width: 0; width: 100%; }
+}
+
+
+/* ==========================================================
+   v19: Mobile booking first-screen calendar, 44px header/footer
+   taps, no clipped Confirm, hide booking-page overlays
+   ========================================================== */
+
+/* Home hero at very narrow widths: keep the Get 20% Off tab, but
+   shrink it and give the centered hero copy room so the tab no
+   longer clips the lede (seen at 360px). Wording unchanged. */
+@media (max-width: 400px) {
+    /* Sit on the hero photo, between the CTA and the chat bubble,
+       so the tab no longer covers the headline, lede, or Book button. */
+    .deals-tab {
+        top: auto; bottom: 88px; transform: rotate(180deg);
+        padding: 8px 4px; min-height: 64px;
+        font-size: .625rem; letter-spacing: .1em;
+        border-radius: 0 8px 8px 0;
+    }
+    .hero h1,
+    .hero .lede { padding-inline: 36px; }
+}
+
+/* Booking page, phones only. Desktop booking layout is unchanged. */
+@media (max-width: 833px) {
+    /* 2. Compact the navy hero and the four info chips so the
+       calendar starts on (or just below) the first screen. */
+    body.page-book .book-hero {
+        padding: 16px 0 14px;
+    }
+    body.page-book .book-hero h1 {
+        font-size: 1.75rem;
+        line-height: 1.15;
+        margin: 8px auto 8px;
+        max-width: 18em;
+    }
+    body.page-book .book-hero .lede {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin: 0 auto;
+    }
+    body.page-book .book-hero .eyebrow {
+        font-size: .6875rem;
+    }
+    body.page-book #scheduling.section,
+    body.page-book #scheduling.section--after-band {
+        padding-top: 14px;
+        padding-bottom: 40px;
+    }
+    body.page-book .book-quick {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+    body.page-book .book-quick li {
+        font-size: .8125rem;
+        padding: 6px 10px;
+    }
+    body.page-book .cal-card-head {
+        padding: 12px 16px 10px;
+        gap: 2px;
+    }
+    body.page-book .cal-card-head h2 { font-size: 1.375rem; }
+    body.page-book .cal-card-head p { font-size: .8125rem; }
+    body.page-book .cal-text-btn { margin-top: 4px; }
+
+    /* 3. Bag-count dropdown opens upward under the sticky header.
+       Lower the header stacking order so the Cal iframe (and the
+       list inside it) paints on top when they overlap. Raise it
+       again when the menu is open. Keep the frosted header look. */
+    body.page-book .site-header { z-index: 10; }
+    html.menu-open body.page-book .site-header { z-index: 200; }
+    body.page-book .cal-card,
+    body.page-book .cal-wrapper,
+    body.page-book #my-cal-inline-15min { overflow: visible; }
+    body.page-book .cal-wrapper,
+    body.page-book #my-cal-inline-15min { z-index: 30; scroll-margin-top: 8px; }
+    body.page-book #my-cal-inline-15min iframe { position: relative; z-index: 30; }
+
+    /* 4. The red tab and Messenger bubble cover the form and Confirm. */
+    body.page-book .deals-tab,
+    body.page-book .fb-chat-btn { display: none; }
+}
+
+@media (max-width: 600px) {
+    body.page-book .book-hero h1 { font-size: 1.625rem; }
 }

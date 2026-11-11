@@ -1,4 +1,4 @@
-/* Kerrier Laundry Co. - shared site behavior (all pages), v18 */
+/* Kerrier Laundry Co. - shared site behavior (all pages), v19 */
 
 // ── Analytics helper ─────────────────────────────────────────
 // Sends a GA4 event through gtag. Never throws, and does nothing if
@@ -82,7 +82,7 @@ window.kerrierSubscribeNewsletter = function (email, name, town) {
     function track(name, params) {
         try {
             if (typeof window.gtag !== "function") return;
-            var p = { page: pageName() };
+            var p = { page: pageName(), transport_type: "beacon" };
             if (params) for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k];
             window.gtag("event", name, p);
         } catch (e) { /* analytics must never break the site */ }
@@ -116,8 +116,7 @@ window.kerrierSubscribeNewsletter = function (email, name, town) {
         else if (BOOK_RE.test(href)) track("book_click", { link_location: linkLocation(a) });
     }, true);
 
-    // Cal.com booking embed (booking page only). Listeners are queued on the
-    // "15min" namespace and attach when Cal's embed.js loads.
+    // Cal.com booking embed (booking page only).
     // Documented public events: linkReady, bookerReady, bookingSuccessfulV2,
     // bookingSuccessful (deprecated), linkFailed. Cal exposes NO event for
     // picking a date or a time slot (checked against Cal's embed source and
@@ -132,55 +131,79 @@ window.kerrierSubscribeNewsletter = function (email, name, town) {
     //     grows by FORM_GROWTH_PX or more over its loaded height.
     // Funnel: calendar_loaded > booking_calendar_used > booking_time_selected
     //   > booking_completed. Each fires at most once per page view.
+    // Listeners attach with retry on the "15min" namespace, the global Cal
+    // function, and Cal.ns["*"], so a late-loading embed still gets them.
+    // booked() is shared and de-duplicated by once(). Only non-personal
+    // fields are sent (is_recurring, booking_status, embed_event, error_code).
     try {
-        var cal = window.Cal && window.Cal.ns && window.Cal.ns["15min"];
-        if (typeof cal === "function") {
-            var sent = {};
-            var once = function (name, params) { if (sent[name]) return; sent[name] = true; track(name, params); };
-            var on = function (action, fn) { cal("on", { action: action, callback: fn }); };
-            // linkReady has been reported to not always fire, so bookerReady is a backup.
-            on("linkReady", function () { once("calendar_loaded", { embed_event: "linkReady" }); });
-            on("bookerReady", function () { once("calendar_loaded", { embed_event: "bookerReady" }); });
-            on("linkFailed", function (e) {
-                var d = (e && e.detail && e.detail.data) || {};
-                once("calendar_error", { error_code: String(d.code || "unknown").slice(0, 40) });
+        var sent = {};
+        var once = function (name, params) { if (sent[name]) return; sent[name] = true; track(name, params); };
+        var bound = [];
+        var booked = function (e) {
+            var d = (e && e.detail && e.detail.data) || {};
+            once("booking_completed", {
+                is_recurring: d.isRecurring ? "yes" : "no",
+                booking_status: d.status ? String(d.status).toLowerCase().slice(0, 20) : "unknown"
             });
-            // Booking finished. Only non-personal fields are sent.
-            var booked = function (e) {
-                var d = (e && e.detail && e.detail.data) || {};
-                once("booking_completed", {
-                    is_recurring: d.isRecurring ? "yes" : "no",
-                    booking_status: d.status ? String(d.status).toLowerCase().slice(0, 20) : "unknown"
+        };
+        var FORM_GROWTH_PX = 30;
+        var baseH = 0, baseW = 0, lastH = 0, lastW = 0, ready = false, moved = false;
+        var setBase = function () { if (lastH) { baseH = lastH; baseW = lastW; } ready = true; };
+        var onDim = function (e) {
+            var d = (e && e.detail && e.detail.data) || {};
+            var h = +d.iframeHeight || 0, w = +d.iframeWidth || 0;
+            if (!h) return;
+            lastH = h; lastW = w;
+            if (!ready) return;
+            // Before any click, or after a width change (rotation, resize),
+            // just re-measure the resting height; don't count it.
+            if (!moved || !baseH || (baseW && w && Math.abs(w - baseW) > 2)) { baseH = h; baseW = w; return; }
+            if (moved && h - baseH >= FORM_GROWTH_PX) {
+                once("booking_time_selected", { embed_event: "route_change_and_form_height" });
+            }
+        };
+        var onRoute = function () {
+            if (!ready) return;
+            moved = true;
+            once("booking_calendar_used", { embed_event: "__routeChanged" });
+        };
+        function bind(target) {
+            if (typeof target !== "function") return false;
+            if (bound.indexOf(target) !== -1) return true;
+            try {
+                var on = function (action, fn) { target("on", { action: action, callback: fn }); };
+                // linkReady has been reported to not always fire, so bookerReady is a backup.
+                on("linkReady", function () { once("calendar_loaded", { embed_event: "linkReady" }); });
+                on("bookerReady", function () { once("calendar_loaded", { embed_event: "bookerReady" }); });
+                on("linkFailed", function (e) {
+                    var d = (e && e.detail && e.detail.data) || {};
+                    once("calendar_error", { error_code: String(d.code || "unknown").slice(0, 40) });
                 });
-            };
-            on("bookingSuccessfulV2", booked);
-            on("bookingSuccessful", booked); // older name, de-duplicated by once()
-
-            // Middle of the funnel (proxies, see note above).
-            var FORM_GROWTH_PX = 30;
-            var baseH = 0, baseW = 0, lastH = 0, lastW = 0, ready = false, moved = false;
-            var setBase = function () { if (lastH) { baseH = lastH; baseW = lastW; } ready = true; };
-            on("__dimensionChanged", function (e) {
-                var d = (e && e.detail && e.detail.data) || {};
-                var h = +d.iframeHeight || 0, w = +d.iframeWidth || 0;
-                if (!h) return;
-                lastH = h; lastW = w;
-                if (!ready) return;
-                // Before any click, or after a width change (rotation, resize),
-                // just re-measure the resting height; don't count it.
-                if (!moved || !baseH || (baseW && w && Math.abs(w - baseW) > 2)) { baseH = h; baseW = w; return; }
-                if (moved && h - baseH >= FORM_GROWTH_PX) {
-                    once("booking_time_selected", { embed_event: "route_change_and_form_height" });
-                }
-            });
-            on("linkReady", setBase);
-            on("bookerReady", setBase);
-            on("__routeChanged", function () {
-                if (!ready) return;
-                moved = true;
-                once("booking_calendar_used", { embed_event: "__routeChanged" });
-            });
+                on("bookingSuccessfulV2", booked);
+                on("bookingSuccessful", booked); // older name, de-duplicated by once()
+                on("__dimensionChanged", onDim);
+                on("linkReady", setBase);
+                on("bookerReady", setBase);
+                on("__routeChanged", onRoute);
+                bound.push(target);
+                return true;
+            } catch (err) { return false; }
         }
+        var tries = 0, maxTries = 40;
+        var attempt = function () {
+            var cal = window.Cal;
+            var ns = cal && cal.ns;
+            bind(cal);
+            if (ns) {
+                bind(ns["15min"]);
+                bind(ns["*"]);
+            }
+            var hasNs = ns && bound.indexOf(ns["15min"]) !== -1;
+            if (hasNs) return;
+            tries += 1;
+            if (tries < maxTries) setTimeout(attempt, 250);
+        };
+        attempt();
     } catch (e) { /* never break the page over analytics */ }
 })();
 
