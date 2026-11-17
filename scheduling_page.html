@@ -23,8 +23,17 @@
     <link rel="preconnect" href="https://res.cloudinary.com">
     <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="business.styles.css?v=19">
+    <link rel="stylesheet" href="business.styles.css?v=20">
     <script>document.documentElement.classList.add("js");</script>
+    <script>
+        if (!location.hash) {
+            if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+            window.scrollTo(0, 0);
+            window.addEventListener("pageshow", function () {
+                if (!location.hash) window.scrollTo(0, 0);
+            });
+        }
+    </script>
 <!-- MailerLite Universal -->
 <script>
 (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
@@ -125,7 +134,7 @@ ml('account', '2742056');
                                 config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
                                 calLink: "kerrier-laundry-co-cq6rul/15min",
                             });
-                            Cal.ns["15min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+                            Cal.ns["15min"]("ui", {"hideEventTypeDetails":true,"layout":"month_view"});
                         </script>
                         <!-- Cal inline embed code ends -->
                         </div>
@@ -190,7 +199,7 @@ ml('account', '2742056');
         </svg>
     </a>
 
-    <script src="site.js?v=19" defer></script>
+    <script src="site.js?v=20" defer></script>
 
 </body>
 </html>

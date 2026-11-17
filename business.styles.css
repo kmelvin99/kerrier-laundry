@@ -1182,3 +1182,50 @@ html.menu-open .deals-tab { opacity: 0; visibility: hidden; }
 @media (max-width: 600px) {
     body.page-book .book-hero h1 { font-size: 1.625rem; }
 }
+
+
+/* ==========================================================
+   v20: Booking page, phones only. Compact the hero and the
+   info chips so the first bookable date row sits on the first
+   screen at 390x844 and 360x800. Chips use a 2-by-2 grid so
+   they no longer wrap to a third row at 360. Wording, prices,
+   and 24-48 hours turnaround are unchanged. Desktop and the
+   frosted header are unchanged.
+   ========================================================== */
+@media (max-width: 833px) {
+    body.page-book .book-hero {
+        padding: 10px 0 8px;
+    }
+    body.page-book .book-hero h1 {
+        font-size: 1.5rem;
+        line-height: 1.12;
+        margin: 4px auto 6px;
+    }
+    body.page-book .book-hero .lede {
+        font-size: .9375rem;
+        line-height: 1.3;
+    }
+    body.page-book .book-hero .eyebrow {
+        font-size: .625rem;
+    }
+    body.page-book #scheduling.section,
+    body.page-book #scheduling.section--after-band {
+        padding-top: 8px;
+        padding-bottom: 40px;
+    }
+    body.page-book .book-quick {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    body.page-book .book-quick li {
+        font-size: .75rem;
+        line-height: 1.25;
+        padding: 6px 8px;
+        min-width: 0;
+    }
+}
+@media (max-width: 600px) {
+    body.page-book .book-hero h1 { font-size: 1.4375rem; }
+}
