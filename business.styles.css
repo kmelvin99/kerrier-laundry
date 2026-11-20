@@ -1229,3 +1229,24 @@ html.menu-open .deals-tab { opacity: 0; visibility: hidden; }
 @media (max-width: 600px) {
     body.page-book .book-hero h1 { font-size: 1.4375rem; }
 }
+
+/* ==========================================================
+   v21: 24-hour notice on the booking page, above the
+   calendar. Compact on phones so the first bookable date
+   stays on the first screen at 390x844 and 360x800.
+   ========================================================== */
+.book-notice {
+    margin: 0 0 12px;
+    font-size: .875rem;
+    line-height: 1.35;
+    color: var(--muted);
+    text-align: center;
+}
+@media (max-width: 833px) {
+    body.page-book .book-notice {
+        margin: 0 0 6px;
+        font-size: .75rem;
+        line-height: 1.25;
+    }
+    body.page-book .book-quick { margin-bottom: 6px; }
+}
