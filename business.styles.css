@@ -1259,3 +1259,18 @@ html.menu-open .deals-tab { opacity: 0; visibility: hidden; }
 body.page-book .cal-wrapper,
 body.page-book #my-cal-inline-15min { background: var(--navy-ink); }
 body.page-book .cal-wrapper::before { color: var(--on-navy); }
+
+/* ==========================================================
+   v24: Round the navy calendar to match .cal-card, which
+   uses --radius-lg (28px). Clip overflow on the wrapper
+   and radius on the iframe so square navy corners do not
+   show on desktop or phones.
+   ========================================================== */
+body.page-book .cal-wrapper,
+body.page-book #my-cal-inline-15min {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+body.page-book #my-cal-inline-15min iframe {
+    border-radius: var(--radius-lg);
+}
