@@ -1330,3 +1330,42 @@ body.page-book #my-cal-inline-15min iframe {
         transform: none;
     }
 }
+
+/* ==========================================================
+   v28: Phones only. Keep the 2-by-2 .book-quick cards, but
+   tighten the wording and typography so each card reads
+   cleanly (no mid-phrase or mid-number wraps). Equal card
+   heights in the grid, centered text, and nowrap on the
+   phone number. At 360 the number sits on its own line
+   under "Call/text". Desktop is unchanged (chips are hidden).
+   ========================================================== */
+@media (max-width: 833px) {
+    body.page-book .book-quick {
+        align-items: stretch;
+    }
+    body.page-book .book-quick li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        line-height: 1.3;
+        box-sizing: border-box;
+    }
+    body.page-book .book-quick-phone {
+        white-space: nowrap;
+    }
+}
+@media (max-width: 600px) {
+    body.page-book .book-quick li {
+        font-size: .8125rem;
+        line-height: 1.3;
+        padding: 8px 8px;
+        min-height: 52px; /* match the two-line Call/text card */
+    }
+    body.page-book .book-quick-phone {
+        display: block;
+        margin-top: 1px;
+    }
+}
