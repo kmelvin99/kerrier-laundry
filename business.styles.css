@@ -1291,3 +1291,24 @@ body.page-book #my-cal-inline-15min iframe {
         min-height: 0;
     }
 }
+
+/* ==========================================================
+   v26: Phones only. The 600px min-height plus navy-ink
+   wrapper background left a darker #0F2539 band below the
+   lighter calendar (empty except for the wrapper's rounded
+   bottom corners). Fit the wrapper to the iframe and use
+   the lighter navy so the calendar ends cleanly with
+   rounded corners on the cream page. Keep a 600px lighter-
+   navy placeholder only until the iframe exists. Desktop
+   (v25 padding + navy-ink frame) is unchanged.
+   ========================================================== */
+@media (max-width: 833px) {
+    body.page-book .cal-wrapper,
+    body.page-book #my-cal-inline-15min {
+        min-height: 0;
+        background: var(--navy);
+    }
+    body.page-book .cal-wrapper:not(:has(iframe)) {
+        min-height: 600px;
+    }
+}
