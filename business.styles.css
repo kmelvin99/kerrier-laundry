@@ -1369,3 +1369,24 @@ body.page-book #my-cal-inline-15min iframe {
         margin-top: 1px;
     }
 }
+
+/* ==========================================================
+   v29: Phones only. Kelly asked to drop the price and
+   call/text chips (the Text us instead button already
+   covers messaging). Keep "Within 15 miles" and
+   "Back in 24-48 hrs" in one even two-column row, same
+   card styling and centered text. Desktop is unchanged
+   (these chips stay hidden).
+   ========================================================== */
+@media (max-width: 833px) {
+    body.page-book .book-quick {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+}
+@media (max-width: 600px) {
+    body.page-book .book-quick li {
+        min-height: 0; /* no longer matching a two-line Call/text card */
+    }
+}
