@@ -1312,3 +1312,21 @@ body.page-book #my-cal-inline-15min iframe {
         min-height: 600px;
     }
 }
+
+/* ==========================================================
+   v27: Phones only. The tall cream band under the calendar
+   was the desktop "At a glance" sidebar (.book-summary,
+   order 2, 822px), still in the layout but painted at
+   opacity 0 because .reveal had not been marked is-visible
+   (it sits below the first screen). Full-page screenshots
+   and the first scroll therefore showed a blank strip with
+   only the "Don't see a time" line. Show the card
+   immediately so the pricing block is visible and the
+   blank band is gone. Desktop is unchanged.
+   ========================================================== */
+@media (max-width: 833px) {
+    body.page-book .book-summary.reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
