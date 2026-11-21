@@ -1274,3 +1274,20 @@ body.page-book #my-cal-inline-15min {
 body.page-book #my-cal-inline-15min iframe {
     border-radius: var(--radius-lg);
 }
+
+/* ==========================================================
+   v25: Desktop only. Cal's lighter booker is flush with the
+   top of the dark navy wrapper, with ~50px left/right and
+   ~80px bottom already inside the iframe. Add 50px top
+   padding so the dark navy borders the lighter box evenly
+   with the side inset. min-height is unset so the wrapper
+   does not add extra empty navy under the iframe. Mobile
+   is unchanged (Kelly said it looks better).
+   ========================================================== */
+@media (min-width: 834px) {
+    body.page-book .cal-wrapper {
+        padding: 50px 0 0;
+        box-sizing: border-box;
+        min-height: 0;
+    }
+}
